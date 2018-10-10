@@ -24,16 +24,16 @@ p{
 	padding-left: 120px;
 }
 
-#inner_div1, #inner_div2{
+.inner_div{
 	background-color: #222;
 	color: #eee;
 	width: 400px;
 	padding: 30px;
 }
 
-h2{ text-align: center; color: #00d8ff; margin-top: 0px; }
-#inner_div1{ float: right; }
-#inner_div2{ float: left; }
+h2{ text-align: center; color: #00d8ff; margin-top: 0px; margin-bottom: 0px; }
+#inner_div1, #inner_div3, #inner_div5 { float: right; margin-bottom: 10px;}
+#inner_div2, #inner_div4, #inner_div6{ float: left; margin-bottom: 10px;}
 
 input{
 	background-color: transparent;
@@ -59,14 +59,12 @@ button{
     border-radius: 5px;
 }
 
-footer{
-    background-color: black;
-    color: white;
-    text-align: center;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    padding: 15px;
-    width: 100%;
-    box-sizing: border-box;
+
+#add_book, #add_user, #update_book, #update_user, #list_book, #list_user{
+	display: none;
 }
+
+.expand{
+	cursor: pointer;
+}
+

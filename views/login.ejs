@@ -2,11 +2,12 @@
 <html>
 <head>
 	<title><%= title %></title>
-	<link rel="stylesheet" type="text/css" href="/css/login.css">
+	<link rel="stylesheet" type="text/css" href="/CSS/login.css">
 </head>
 <body>
 	<div id="header">
 		<h1>Library Management System</h1>
+	<!-- 	<p style="color: white;">Our goal is to provide a user friendly interface to enable next generation of library management. We strive to simplify and automate trivial processes to provide end user peace of mind</p> -->
 	</div>
 	
 	<div id="div1">
@@ -23,16 +24,39 @@
 
 	<div id="div2">
 		<div id="inner_div2">
-			<h2>Student Login</h2>
-			<input type="text" id="stu_id" placeholder="Student ID"><br>
+			<h2>User Login</h2>
+			<input type="text" id="stu_id" placeholder="User ID"><br>
 			<input type="password" id="stu_pass" placeholder="Password"><br>
 			<div style="text-align: center;">
-				<button id="stu_login">Student Login</button>
+				<button id="stu_login">User Login</button>
 			</div>
 		</div>
 	</div>
+	<br clear="all">
+
+	<footer>
+		<small> Created by Ritu Raj (1607005), Sanket Sanath Jha (1607008), Bipul Kumar (1607035), Arkaza Kumari (1607039) </small>
+	</footer>
+
 </body>
 
 <script type="text/javascript" src="/JS/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(()=>{
+		$("#admin_login").on("click", ()=>{
+			var admin_id = $("#admin_id").val();
+			var password = $("#admin_pass").val();
+			var data = { admin_id, password };
+			$.ajax({
+				type: 'POST',
+				url: '/admin/login',
+				data,
+				success: function(){
+					window.location = "/admin/dashboard";
+				}
+			});
+		});
+	});
+</script>
 
 </html>

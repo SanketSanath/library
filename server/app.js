@@ -13,6 +13,17 @@ app.get('/', (req, res)=>{
 	res.render('login.ejs', {title: "Login"});
 });
 
+app.post('/admin/login', (req, res)=>{
+	var user_id = req.body.admin_id;
+	var password = req.body.password;
+	console.log(user_id, password);
+	res.send('hello baby');
+});
+
+app.get('/admin/dashboard', (req, res)=>{
+	res.render('admin_dashboard.ejs', {title: "Admin"});
+});
+
 app.listen(3000, ()=>{
 	console.log('server is running');
-})
+});
