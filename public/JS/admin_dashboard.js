@@ -6,6 +6,21 @@ $(document).ready(function() {
 		e.preventDefault();
 		var book_isbn = $("#ab_isbn").val(), book_name = $("#ab_book_name").val(), book_author = $("#ab_author").val(), book_q = $("#ab_book_q").val();
 		$("#ab_isbn").val(''); $("#ab_book_name").val(''); $("#ab_author").val(''); $("#ab_book_q").val('');
+		var data = {book_isbn, book_name, book_author, book_q};
+		$.ajax({
+			type: 'POST',
+			url: '/add_book',
+			data,
+			success: function(value) {
+				console.log("Added stuff")
+				console.log(value);
+			},
+			error: function(error) {	
+			console.log(error);	
+				alert(error.responseText);
+				console.log(error.responseText);
+			}
+		});
 
 		console.log('add book: ', book_isbn, book_name, book_author, book_q);
 	});
