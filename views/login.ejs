@@ -51,8 +51,30 @@
 				type: 'POST',
 				url: '/admin/login',
 				data,
-				success: function(){
+				success: function() {
 					window.location = "/admin/dashboard";
+				},
+				error: function(error) {	
+				console.log(error);	
+					alert(error.responseText);
+					console.log(error.responseText);
+				}
+			});
+		});
+		$("#stu_login").on("click", ()=>{
+			var user_id = $("#stu_id").val();
+			var password = $("#stu_pass").val();
+			var data = { user_id, password };
+			$.ajax({
+				type: 'POST',
+				url: '/user/login',
+				data,success: function() {
+					window.location = "/user/dashboard";
+				},
+				error: function(error) {	
+				console.log(error);	
+					alert(error.responseText);
+					console.log(error.responseText);
 				}
 			});
 		});
