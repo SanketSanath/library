@@ -48,12 +48,12 @@ DROP TABLE IF EXISTS `borrowed`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `borrowed` (
   `user_id` varchar(20) NOT NULL,
-  `book_id` varchar(20) NOT NULL,
+  `book_id` int(11) NOT NULL,
   `due_date` datetime NOT NULL,
-  KEY `user_id` (`user_id`),
   KEY `book_id` (`book_id`),
-  CONSTRAINT `borrowed_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
-  CONSTRAINT `borrowed_ibfk_2` FOREIGN KEY (`book_id`) REFERENCES `library_books` (`book_id`)
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `borrowed_ibfk_1` FOREIGN KEY (`book_id`) REFERENCES `library_books` (`book_id`),
+  CONSTRAINT `borrowed_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -74,7 +74,7 @@ DROP TABLE IF EXISTS `library_books`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `library_books` (
-  `book_id` varchar(20) NOT NULL,
+  `book_id` int(11) NOT NULL AUTO_INCREMENT,
   `isbn` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`book_id`),
   KEY `isbn` (`isbn`),
@@ -128,4 +128,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-29 15:48:03
+-- Dump completed on 2018-10-29 18:40:10

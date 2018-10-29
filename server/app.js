@@ -37,6 +37,39 @@ app.post('/admin/login', (req, res)=>{
 	});
 });
 
+app.post('/add_book',(req,res)=> {
+	var book_isbn = req.body.book_isbn;
+	var book_name = req.body.book_name;
+	var book_author = req.body.book_author;
+	var book_q = req.body.book_q;
+	con.query("SELECT * FROM books WHERE isbn="+mysql.escape(book_isbn), function (err, result, fields) {
+		if(err)
+			throw err;
+		if(typeof result == 'undefined' || result.length==0) {
+			var items=0;
+			con.query("INSERT INTO books values ("+mysql.escape(book_isbn)+","+mysql.escape(book_name)+","+mysql.escape(book_author)+")", function(err, result,fields) {
+				var barray = [];
+				if(err)
+					throw err;
+				for(var i=0;i<book_q;i++) {
+					con.query("INSERT INTO library_books (isbn) values ("+mysql.escape(book_isbn)+"); SELECT LAST_INSERT_ID() as id;", function(err, result, fields) {
+						if(err)
+							throw err;
+						barray[items]=result[1][0].id;
+						items++;
+						if(items==book_q) {
+							res.json(barray);
+						}
+					})
+				}
+			});
+		}
+		else {
+			res.status(500).send('Entered book already exists (Use update to update quantity)')
+		}
+	});
+});
+
 app.post('/user/login', (req, res)=>{
 	var user_id = req.body.user_id;
 	var password = req.body.password;
@@ -79,7 +112,8 @@ var con = mysql.createConnection({
   host: "localhost",
   user: "developer",
   password: "password",
-  database: "library"
+  database: "library",
+  multipleStatements: true
 });
 
 con.connect(function(err) {
