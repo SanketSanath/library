@@ -13,80 +13,102 @@
 		<div class="inner_div" id="inner_div1">
 			<img class="expand" id="expand_add_book" src="/expand.svg" width="20px" height="20px" style="float: right;">
 			<h2>Add Book</h2>
-			<div id="add_book">
-				<input type="text" id="admin_id" placeholder="ISBN"><br>
-				<input type="password" id="admin_pass" placeholder="Book Name"><br>
-				<input type="password" placeholder="Author Name"><br>
+			<form id="add_book">
+				<input type="text" id="ab_isbn" placeholder="ISBN"><br>
+				<input type="text" id="ab_book_name" placeholder="Book Name"><br>
+				<input type="text" id="ab_author" placeholder="Author Name"><br>
+				<input type="number" id="ab_book_q" placeholder="Book Quantity"><br>
 				<div style="text-align: center;">
-					<button id="admin_login">Admin Login</button>
+					<button id="ab_button">Admin Login</button>
 				</div>
-			</div>
+			</form>
 		</div>
 
 		<div class="inner_div" id="inner_div3">
 			<img class="expand" id="expand_update_book" src="/expand.svg" width="20px" height="20px" style="float: right;">
 			<h2>Update Book</h2>
-			<div id="update_book">
-				<input type="text" placeholder="Admin ID"><br>
-				<input type="password" placeholder="Password"><br>
+			<form id="update_book">
+				<input type="text" id="ub_isbn" placeholder="ISBN"><br>
+				<input type="number" id="ub_book_q" placeholder="Quantity"><br>
 				<div style="text-align: center;">
-					<button>Update Book</button>
+					<button id="ub_button">Update Book</button>
 				</div>
-			</div>
+			</form>
 		</div>
 
 		<div class="inner_div" id="inner_div5">
 			<img class="expand" id="expand_list_book" src="/expand.svg" width="20px" height="20px" style="float: right;">
 			<h2>List Book</h2>
-			<div id="list_book">
-				<input type="text" placeholder="Admin ID"><br>
-				<input type="password" placeholder="Password"><br>
+			<form id="list_book">
 				<div style="text-align: center;">
-					<button>List Book</button>
+					<button id="lb_button">List Book</button>
 				</div>
-			</div>
+			</form>
+		</div>
+
+		<div class="inner_div" id="inner_div7">
+			<img class="expand" id="expand_search_book" src="/expand.svg" width="20px" height="20px" style="float: right;">
+			<h2>Search Book</h2>
+			<form id="search_book">
+				<input type="text" id="sb_isbn" placeholder="ISBN"><br>
+				<div style="text-align: center;">
+					<button id="sb_button">Search Book</button>
+				</div>
+			</form>
 		</div>
 		
 	</div>
+
+
+<!--right side of the screen-->
 
 	<div id="div2">
 		<div class="inner_div" id="inner_div2">
 			<img class="expand" id="expand_add_user" src="/expand.svg" width="20px" height="20px" style="float: right;">
 			<h2>Add User</h2>
-			<div id="add_user">
-				<input type="text" id="stu_id" placeholder="User ID"><br>
-				<input type="text" placeholder="User Name"><br>
-				<input type="text" placeholder="User Dept."><br>
-				<input type="text" placeholder="User Password"><br>
+			<form id="add_user">
+				<input type="text" id="au_user_id" placeholder="User ID"><br>
+				<input type="text" id="au_user_name" placeholder="User Name"><br>
+				<input type="text" id="au_user_dept" placeholder="User Dept."><br>
+				<input type="text" id="au_user_pass" placeholder="User Password"><br>
 
 				<div style="text-align: center;">
-					<button id="stu_login">User Login</button>
+					<button id="au_button">Add User</button>
 				</div>
-			</div>
+			</form>
 		</div>
 
 		<div class="inner_div" id="inner_div4">
 			<img class="expand" id="expand_update_user" src="/expand.svg" width="20px" height="20px" style="float: right;">
 			<h2>Update User</h2>
-			<div id="update_user">
-				<input type="text" placeholder="User ID"><br>
-				<input type="password" placeholder="Password"><br>
+						<form id="update_user">
+				<input type="text" id="uu_user_id" placeholder="User ID"><br>
+				<input type="password" id="uu_user_pass" placeholder="Password"><br>
 				<div style="text-align: center;">
-					<button>Update User</button>
+					<button id="uu_button" >Update User</button>
 				</div>
-			</div>
+			</form>
 		</div>
 
 		<div class="inner_div" id="inner_div6">
 			<img class="expand" id="expand_list_user" src="/expand.svg" width="20px" height="20px" style="float: right;">
 			<h2>List User</h2>
-			<div id="list_user">
-				<input type="text" placeholder="User ID"><br>
-				<input type="password" placeholder="Password"><br>
+			<form id="list_user">
 				<div style="text-align: center;">
-					<button>List User</button>
+					<button id="lu_button" >List User</button>
 				</div>
-			</div>
+			</form>
+		</div>
+
+		<div class="inner_div" id="inner_div8">
+			<img class="expand" id="expand_search_user" src="/expand.svg" width="20px" height="20px" style="float: right;">
+			<h2>Search User</h2>
+			<form id="search_user">
+				<input type="text" id="su_user_id" placeholder="User ID"><br>
+				<div style="text-align: center;">
+					<button id="su_button">Search User</button>
+				</div>
+			</form>
 		</div>
 
 	</div>

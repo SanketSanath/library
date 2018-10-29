@@ -77,8 +77,8 @@ app.listen(3000, ()=>{
 
 var con = mysql.createConnection({
   host: "localhost",
-  user: "root",
-  password: "root",
+  user: "developer",
+  password: "password",
   database: "library"
 });
 
