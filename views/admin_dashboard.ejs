@@ -14,10 +14,10 @@
 			<img class="expand" id="expand_add_book" src="/expand.svg" width="20px" height="20px" style="float: right;">
 			<h2>Add Book</h2>
 			<form id="add_book">
-				<input type="text" id="ab_isbn" placeholder="ISBN"><br>
-				<input type="text" id="ab_book_name" placeholder="Book Name"><br>
-				<input type="text" id="ab_author" placeholder="Author Name"><br>
-				<input type="number" id="ab_book_q" placeholder="Book Quantity"><br>
+				<input type="text" id="ab_isbn" placeholder="ISBN" required /><br>
+				<input type="text" id="ab_book_name" placeholder="Book Name" required /><br>
+				<input type="text" id="ab_author" placeholder="Author Name" required /><br>
+				<input type="number" id="ab_book_q" placeholder="Book Quantity" required /><br>
 				<div style="text-align: center;">
 					<button id="ab_button">Add book</button>
 				</div>
@@ -28,8 +28,8 @@
 			<img class="expand" id="expand_update_book" src="/expand.svg" width="20px" height="20px" style="float: right;">
 			<h2>Update Book</h2>
 			<form id="update_book">
-				<input type="text" id="ub_isbn" placeholder="ISBN"><br>
-				<input type="number" id="ub_book_q" placeholder="Quantity"><br>
+				<input type="text" id="ub_isbn" placeholder="ISBN" required /><br>
+				<input type="number" id="ub_book_q" placeholder="Quantity" required /><br>
 				<div style="text-align: center;">
 					<button id="ub_button">Update Book</button>
 				</div>
@@ -50,7 +50,7 @@
 			<img class="expand" id="expand_search_book" src="/expand.svg" width="20px" height="20px" style="float: right;">
 			<h2>Search Book</h2>
 			<form id="search_book">
-				<input type="text" id="sb_isbn" placeholder="ISBN"><br>
+				<input type="text" id="sb_isbn" placeholder="ISBN" required /="true"><br>
 				<div style="text-align: center;">
 					<button id="sb_button">Search Book</button>
 				</div>
@@ -67,13 +67,14 @@
 			<img class="expand" id="expand_add_user" src="/expand.svg" width="20px" height="20px" style="float: right;">
 			<h2>Add User</h2>
 			<form id="add_user">
-				<input type="text" id="au_user_id" placeholder="User ID"><br>
-				<input type="text" id="au_user_name" placeholder="User Name"><br>
-				<input type="text" id="au_user_dept" placeholder="User Dept."><br>
-				<input type="text" id="au_user_pass" placeholder="User Password"><br>
+				<input type="text" id="au_user_id" placeholder="User ID" required /><br>
+				<input type="text" id="au_user_name" placeholder="User Name" required /><br>
+				<input type="text" id="au_user_roll" placeholder="User Roll No." required /><br>
+				<input type="text" id="au_user_dept" placeholder="User Dept." required /><br>
+				<input type="password" id="au_user_pass" placeholder="User Password" required /><br>
 
 				<div style="text-align: center;">
-					<button id="au_button">Add User</button>
+					<button id="au_button" type="submit">Add User</button>
 				</div>
 			</form>
 		</div>
@@ -82,8 +83,8 @@
 			<img class="expand" id="expand_update_user" src="/expand.svg" width="20px" height="20px" style="float: right;">
 			<h2>Update User</h2>
 						<form id="update_user">
-				<input type="text" id="uu_user_id" placeholder="User ID"><br>
-				<input type="password" id="uu_user_pass" placeholder="Password"><br>
+				<input type="text" id="uu_user_id" placeholder="User ID" required /><br>
+				<input type="password" id="uu_user_pass" placeholder="Password" required /><br>
 				<div style="text-align: center;">
 					<button id="uu_button" >Update User</button>
 				</div>
@@ -104,7 +105,7 @@
 			<img class="expand" id="expand_search_user" src="/expand.svg" width="20px" height="20px" style="float: right;">
 			<h2>Search User</h2>
 			<form id="search_user">
-				<input type="text" id="su_user_id" placeholder="User ID"><br>
+				<input type="text" id="su_user_id" placeholder="User ID" required /><br>
 				<div style="text-align: center;">
 					<button id="su_button">Search User</button>
 				</div>

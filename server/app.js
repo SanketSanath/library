@@ -70,6 +70,27 @@ app.post('/add_book',(req,res)=> {
 	});
 });
 
+
+app.post('/add_user', (req, res)=>{
+	var id = req.body.user_id, name = req.body.user_name, roll = parseInt(req.body.user_roll), dept = req.body.user_dept, pass = req.body.user_pass;
+	console.log(id, name, roll, dept, pass);
+	con.query("SELECT * from users WHERE user_id="+mysql.escape(id), function(err, result, fields){
+		if(err)
+			throw err;
+		if(typeof result == 'undefined' || result.length == 0){
+			con.query("INSERT INTO users values ("+mysql.escape(id)+","+mysql.escape(pass)+","+mysql.escape(name)+","+mysql.escape(dept)+","+mysql.escape(roll)+", 2);", function(err, result, fields){
+				if(err)
+					throw err;
+				res.send('inserted');
+			});
+		} else{
+			res.status(500).send('Entered user already exists');
+		}
+
+	})
+});
+
+
 app.post('/user/login', (req, res)=>{
 	var user_id = req.body.user_id;
 	var password = req.body.password;

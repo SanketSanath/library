@@ -50,9 +50,24 @@ $(document).ready(function() {
 	//add user
 	$("#au_button").click(function(e){
 		e.preventDefault();
-		var user_id = $('#au_user_id').val(), user_name = $('#au_user_name').val(), user_dept = $('#au_user_dept').val(), user_pass = $('#au_user_pass').val();
-		$('#au_user_id').val(''); $('#au_user_name').val(''); $('#au_user_dept').val(''); $('#au_user_pass').val('');
-		console.log('these: ', user_id, user_name, user_dept, user_pass);
+		var user_id = $('#au_user_id').val(), user_name = $('#au_user_name').val(), user_roll = $("#au_user_roll").val(), user_dept = $('#au_user_dept').val(), user_pass = $('#au_user_pass').val();
+		$('#au_user_id').val(''); $('#au_user_name').val(''); $("#au_user_roll").val(''); $('#au_user_dept').val(''); $('#au_user_pass').val('');
+
+		var data = {user_id, user_name, user_roll, user_dept, user_pass};
+		$.ajax({
+			type: 'POST',
+			url: '/add_user',
+			data,
+			success: function(value) {
+				console.log("Added stuff")
+				console.log(value);
+			},
+			error: function(error) {	
+			console.log(error);	
+				alert(error.responseText);
+				console.log(error.responseText);
+			}
+		});
 
 
 	});
