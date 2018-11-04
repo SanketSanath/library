@@ -90,6 +90,38 @@ app.post('/add_user', (req, res)=>{
 	})
 });
 
+app.get('/book/:id', (req, res)=>{
+	var isbn = req.params.id;
+
+	con.query("SELECT * FROM books WHERE isbn="+mysql.escape(isbn), function(err, result1, fields){
+		if(err)
+			throw err;
+		console.log(result1[0], result1.length);
+		if(result1.length==0){
+			res.send("404");
+		} else{
+			con.query("SELECT * FROM library_books WHERE isbn="+mysql.escape(isbn), function(err, result2, fields){
+				var items = 0, issued_book = [];
+				for(var i=0; i<result2.length; i++){
+					console.log(result2[i]);
+					con.query("SELECT * FROM borrowed WHERE book_id="+mysql.escape(result2[i].book_id), function(err, result3, fields){
+						if(result3.length == 0){
+							issued_book.push({book_id : result2[items].book_id, user_id: null, due_date: null});
+						} else {
+							issued_book.push({book_id : result2[items].book_id, user_id: result3[0].user_id, due_date: result3[0].due_date});
+						}
+						items++;
+						if(items == result2.length){
+							console.log(issued_book);
+							res.render("book.ejs", {title:"book", result1, issued_book});
+						}
+					});
+
+				}
+			});
+		}
+	})
+});
 
 app.post('/user/login', (req, res)=>{
 	var user_id = req.body.user_id;

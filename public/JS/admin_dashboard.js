@@ -43,8 +43,8 @@ $(document).ready(function() {
 	$("#sb_button").click((e)=>{
 		e.preventDefault();
 		var isbn = $("#sb_isbn").val(); $("#sb_isbn").val('');
-
 		console.log("search_book: ", isbn);
+		window.location.href = "/book/"+isbn;
 	});
 
 	//add user
@@ -61,6 +61,7 @@ $(document).ready(function() {
 			success: function(value) {
 				console.log("Added stuff")
 				console.log(value);
+				alert('one user added');
 			},
 			error: function(error) {	
 			console.log(error);	
