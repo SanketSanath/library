@@ -123,6 +123,37 @@ app.get('/book/:id', (req, res)=>{
 	})
 });
 
+app.get('/barcodes/:id', (req, res)=>{
+	console.log(req.params.id)
+	var array=req.params.id.split(',');
+	res.render("barcodes.ejs",{results: array});
+});
+
+app.get('/view_user/:id', (req, res)=>{
+	var id = req.params.id;
+
+	con.query("SELECT * FROM users WHERE user_id="+mysql.escape(id), function(err, result1, fields){
+		if(err)
+			throw err;
+		console.log(result1[0], result1.length);
+		if(result1.length==0){
+			res.send("404");
+		}
+		else{
+			con.query("SELECT * FROM borrowed WHERE user_id="+mysql.escape(id), function(err, result2, fields){
+				var items = 0, issued_book = [];
+				console.log(result2);
+				while(items<result2.length) {
+					issued_book.push({book_id : result2[items].book_id,due_date: result2[items].due_date});
+					items++;
+				}
+				console.log(issued_book);
+				res.render("users_list.ejs", {title:"Users", result1, issued_book});
+			});
+		}
+	})
+});
+
 app.post('/user/login', (req, res)=>{
 	var user_id = req.body.user_id;
 	var password = req.body.password;
