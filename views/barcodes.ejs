@@ -1,5 +1,28 @@
 <html>
-<body>
-<img id="barcode"/>
-</body>
+	<head>
+		<title>
+			Barcodes generated
+		</title>
+		<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.8.0/dist/JsBarcode.all.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	</head>
+	<body>
+		<div align="center">
+		<input type="button" value="Print this page" onClick="window.print()">
+		</div>
+		<br>
+
+		<%for (var result in results){%>
+		  <svg id="a<%=result%>"><%=results[result]%></svg>
+		  <%}%>
+
+	</body>
+	<script>
+		$(function(){
+			<%for (var result in results){%>
+			JsBarcode("#a<%=result%>","<%=results[result]%>");
+			<%}%>
+			console.log("<%=result%>");
+		})
+	</script>
 </html>

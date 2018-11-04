@@ -12,8 +12,9 @@ $(document).ready(function() {
 			url: '/add_book',
 			data,
 			success: function(value) {
-				console.log("Added stuff")
-				console.log(value);
+				console.log("Added books")
+				if(confirm("Get barcodes for books added"))
+					window.location.href="/barcodes/"+value;
 			},
 			error: function(error) {	
 			console.log(error);	
@@ -92,6 +93,7 @@ $(document).ready(function() {
 	$("#su_button").click((e)=>{
 		e.preventDefault();
 		var user_id = $("#su_user_id").val(); $("#su_user_id").val('');
+		window.location.href = "/view_user/"+user_id;
 
 		console.log("search_user: ", user_id);
 	});
