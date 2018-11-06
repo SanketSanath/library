@@ -90,20 +90,21 @@ app.post('/add_user', (req, res)=>{
 	})
 });
 
+
+//search book
 app.get('/book/:id', (req, res)=>{
 	var isbn = req.params.id;
 
 	con.query("SELECT * FROM books WHERE isbn="+mysql.escape(isbn), function(err, result1, fields){
 		if(err)
 			throw err;
-		console.log(result1[0], result1.length);
+
 		if(result1.length==0){
 			res.send("404");
 		} else{
 			con.query("SELECT * FROM library_books WHERE isbn="+mysql.escape(isbn), function(err, result2, fields){
 				var items = 0, issued_book = [];
 				for(var i=0; i<result2.length; i++){
-					console.log(result2[i]);
 					con.query("SELECT * FROM borrowed WHERE book_id="+mysql.escape(result2[i].book_id), function(err, result3, fields){
 						if(result3.length == 0){
 							issued_book.push({book_id : result2[items].book_id, user_id: null, due_date: null});
@@ -112,7 +113,6 @@ app.get('/book/:id', (req, res)=>{
 						}
 						items++;
 						if(items == result2.length){
-							console.log(issued_book);
 							res.render("book.ejs", {title:"book", result1, issued_book});
 						}
 					});
@@ -128,6 +128,41 @@ app.get('/barcodes/:id', (req, res)=>{
 	var array=req.params.id.split(',');
 	res.render("barcodes.ejs",{results: array});
 });
+
+//issue book
+app.post('/issue_book', (req, res)=>{
+	var book_id = req.body.book_id;
+	var issue_to = req.body.issue_to;
+	console.log(book_id, issue_to);
+
+	con.query("SELECT * FROM users WHERE user_id ="+mysql.escape(issue_to)+";", function(err, result, fields){
+		if(err) throw err;
+		console.log(result.length);
+		if(result.length == 0){
+			res.status(404).send('User doesnot exists');
+		} else{
+			con.query("INSERT INTO borrowed VALUES ("+mysql.escape(issue_to)+","+mysql.escape(book_id)+",DATE_ADD(CURDATE(), INTERVAL 7 DAY))", function(err, result, fields){
+				if(err)
+					throw err;
+				res.send("success");
+			});
+		}
+	});
+});
+
+//return book to library
+app.delete('/return_book', (req, res)=>{
+	var book_id = req.body.book_id;
+
+	console.log(book_id);
+	con.query("DELETE FROM borrowed WHERE book_id="+mysql.escape(book_id)+";", function(err, result, fields){
+		if(err) throw err;
+		console.log(result);
+		res.send("success");
+	});
+});
+
+
 
 app.get('/view_user/:id', (req, res)=>{
 	var id = req.params.id;
