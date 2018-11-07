@@ -104,10 +104,13 @@ app.get('/book/:id', (req, res)=>{
 		} else{
 			con.query("SELECT * FROM library_books WHERE isbn="+mysql.escape(isbn), function(err, result2, fields){
 				var items = 0, issued_book = [];
+				result1[0].total_book = result2.length; //total library books
+				result1[0].available_book = 0;
 				for(var i=0; i<result2.length; i++){
 					con.query("SELECT * FROM borrowed WHERE book_id="+mysql.escape(result2[i].book_id), function(err, result3, fields){
 						if(result3.length == 0){
 							issued_book.push({book_id : result2[items].book_id, user_id: null, due_date: null});
+							result1[0].available_book++; //if book is not borrowed then its available
 						} else {
 							issued_book.push({book_id : result2[items].book_id, user_id: result3[0].user_id, due_date: result3[0].due_date});
 						}
@@ -137,7 +140,7 @@ app.post('/issue_book', (req, res)=>{
 
 	con.query("SELECT * FROM users WHERE user_id ="+mysql.escape(issue_to)+";", function(err, result, fields){
 		if(err) throw err;
-		console.log(result.length);
+
 		if(result.length == 0){
 			res.status(404).send('User doesnot exists');
 		} else{
@@ -154,10 +157,8 @@ app.post('/issue_book', (req, res)=>{
 app.delete('/return_book', (req, res)=>{
 	var book_id = req.body.book_id;
 
-	console.log(book_id);
 	con.query("DELETE FROM borrowed WHERE book_id="+mysql.escape(book_id)+";", function(err, result, fields){
 		if(err) throw err;
-		console.log(result);
 		res.send("success");
 	});
 });

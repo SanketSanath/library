@@ -8,8 +8,10 @@
 <body>
 	<div id="header">
 		<div style="float: left;">
-			ISBN: <%= result1[0].isbn %><br>
-			Author: <%= result1[0].author %>
+			<span style="color: #aaa">ISBN:</span> <%= result1[0].isbn %><br>
+			<span style="color: #aaa">Author:</span> <%= result1[0].author %><br>
+			<span style="color: #aaa">Total Book:</span> <%= result1[0].total_book %><br>
+			<span style="color: #aaa">Available Book:</span> <%= result1[0].available_book %><br>
 		</div>
 		<center><h1 style="color: #00d8ff;"><%= result1[0].name %></h1></center>
 	</div>
