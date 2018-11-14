@@ -85,7 +85,7 @@ $(document).ready(function() {
 	//list user
 	$("#lu_button").click(function(e){
 		e.preventDefault();
-		console.log("clicked");
+		window.location.href = "/user_list";
 	});
 
 	//search user

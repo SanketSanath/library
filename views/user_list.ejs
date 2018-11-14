@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>User List</title>
+	<link rel="stylesheet" type="text/css" href="/CSS/book.css">
+</head>
+<body>
+	<div id="header">
+		<div style="float: left;">
+			<span style="color: #aaa">Total User:</span> <%= users.length %><br>
+		</div>
+		<center><h1 style="color: #00d8ff;">User List</h1></center>
+	</div>
+	
+	<div class="books_cont">
+	<% for(var i = 0; i < users.length; i++){ %>
+		<div class="book_cont">
+
+			<button value="<%= users[i].user_id %>" class="return_btn" style="float: right; width: 25%;">Search User</button>
+			<span style="color: #aaa">User ID:</span> <%= users[i].user_id %><br>
+			<span style="color: #aaa">Name:</span> <%= users[i].name %><br>
+			<span style="color: #aaa">Branch:</span> <%= users[i].branch %><br>
+			<span style="color: #aaa">Roll No:</span> <%= users[i].roll_no %><br>
+
+		</div>
+	<% } %>
+	</div>
+
+</body>
+<script type="text/javascript" src="/JS/jquery-3.3.1.min.js"></script>
+<script>
+$(document).ready(function(){
+	$("button").click(function(e){
+		e.preventDefault();
+		var id = $(this).val();
+		window.location.href = "/view_user/"+id;
+	});
+});
+</script>
+
+</html>

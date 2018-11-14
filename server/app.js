@@ -139,6 +139,13 @@ app.get('/book_list', (req, res)=>{
 	});
 });
 
+app.get('/user_list', (req, res)=>{
+	con.query("SELECT * FROM users WHERE type != '1';", function(err, result, fields){
+		if(err) throw err;
+		res.render("user_list.ejs", {users : result});
+	});
+});
+
 //issue book
 app.post('/issue_book', (req, res)=>{
 	var book_id = req.body.book_id;
