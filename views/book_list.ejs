@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Book List</title>
+	<link rel="stylesheet" type="text/css" href="/CSS/book.css">
+</head>
+<body>
+	<div id="header">
+		<center><h1 style="color: #00d8ff;">Book List</h1></center>
+	</div>
+	
+	<div class="books_cont">
+	<% for(var i = 0; i < books.length; i++){ %>
+		<div class="book_cont">
+
+			<button value="<%= books[i].isbn %>" class="return_btn" style="float: right; width: 25%;">Search Book</button>
+			<span style="color: #aaa">ISBN:</span> <%= books[i].isbn %><br>
+			<span style="color: #aaa">Book Name:</span> <%= books[i].name %><br>
+			<span style="color: #aaa">Author:</span> <%= books[i].author %><br>
+			
+
+		</div>
+	<% } %>
+	</div>
+
+</body>
+<script type="text/javascript" src="/JS/jquery-3.3.1.min.js"></script>
+<script>
+$(document).ready(function(){
+	$("button").click(function(e){
+		e.preventDefault();
+		var isbn = $(this).val();
+		window.location.href = "/book/"+isbn;
+	});
+});
+</script>
+
+</html>

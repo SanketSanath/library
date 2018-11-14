@@ -38,13 +38,12 @@ $(document).ready(function() {
 	//list book
 	$("#lb_button").click(function(e){
 		e.preventDefault();
-		console.log("clicked");
+		window.location.href = "/book_list";
 	});
 	//search book
 	$("#sb_button").click((e)=>{
 		e.preventDefault();
 		var isbn = $("#sb_isbn").val(); $("#sb_isbn").val('');
-		console.log("search_book: ", isbn);
 		window.location.href = "/book/"+isbn;
 	});
 
@@ -139,5 +138,13 @@ $(document).ready(function() {
 
 	$('#expand_search_book').click(function() {
 		$('#search_book').toggle(500);
+	});
+
+	$('#expand_issue_book').click(function() {
+		$('#issue_book').toggle(500);
+	});
+
+	$('#expand_return_book').click(function() {
+		$('#return_book').toggle(500);
 	});
 });

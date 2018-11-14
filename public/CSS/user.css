@@ -1,0 +1,57 @@
+body{
+	background-image: url('/back.jpg');
+	background-attachment: fixed;
+	background-size: cover;
+	color: #eee;
+	font-family: arial;
+}
+
+#header{
+	background-color: #222;
+	padding: 40px;
+	margin-bottom: 30px;
+	text-align: left;
+	top: 5px;
+	position: -webkit-sticky;
+	position: sticky;
+}
+
+.book_cont {
+	border-style: groove;
+	border-width: 1px 2px 1px 2px;
+	border-color: #bbb;
+	padding: 20px;
+}
+
+.books_cont {
+	border: 2px solid black;
+	width: 560px;
+	padding: 30px 70px;
+	margin: auto;
+	background-color: #222222ef;
+
+}
+
+input {
+	width: 50%;
+	padding: 5px;
+	background-color: #222;
+	border: 1px groove #bbb;
+	color: white;
+	font-size: 100%;
+	box-sizing: border-box;
+}
+
+button {
+	width: 50%;
+	padding: 5px;
+	/*background-color: #d2ecff;*/
+	border: 1px groove #bbb;
+	margin-top: 10px;
+	font-size: 100%;
+	box-sizing: border-box;
+	/*float: right;*/
+}
+
+.issue_btn{ background-color: #e2f7ff; }
+.return_btn{ background-color: #ffebe2; }

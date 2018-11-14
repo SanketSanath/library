@@ -132,6 +132,13 @@ app.get('/barcodes/:id', (req, res)=>{
 	res.render("barcodes.ejs",{results: array});
 });
 
+app.get('/book_list', (req, res)=>{
+	con.query("SELECT * FROM books;", function(err, result, fields){
+		if(err) throw err;
+		res.render("book_list.ejs", {books : result});
+	});
+});
+
 //issue book
 app.post('/issue_book', (req, res)=>{
 	var book_id = req.body.book_id;
@@ -141,14 +148,21 @@ app.post('/issue_book', (req, res)=>{
 	con.query("SELECT * FROM users WHERE user_id ="+mysql.escape(issue_to)+";", function(err, result, fields){
 		if(err) throw err;
 
+		//check if user exists
 		if(result.length == 0){
-			res.status(404).send('User doesnot exists');
+			res.status(400).send('User doesnot exists');
 		} else{
-			con.query("INSERT INTO borrowed VALUES ("+mysql.escape(issue_to)+","+mysql.escape(book_id)+",DATE_ADD(CURDATE(), INTERVAL 7 DAY))", function(err, result, fields){
-				if(err)
-					throw err;
-				res.send("success");
-			});
+			//check if book is already issued or not
+			con.query("SELECT * FROM borrowed WHERE book_id="+mysql.escape(book_id)+";", function(err, result, fields){
+				if(result.length==0){
+					con.query("INSERT INTO borrowed VALUES ("+mysql.escape(issue_to)+","+mysql.escape(book_id)+",DATE_ADD(CURDATE(), INTERVAL 7 DAY))", function(err, result, fields){
+						if(err) throw err;
+						res.send("success");
+					});
+				} else{
+					res.status(409).send('Book already issued');
+				}
+			})
 		}
 	});
 });
@@ -156,10 +170,16 @@ app.post('/issue_book', (req, res)=>{
 //return book to library
 app.delete('/return_book', (req, res)=>{
 	var book_id = req.body.book_id;
-
-	con.query("DELETE FROM borrowed WHERE book_id="+mysql.escape(book_id)+";", function(err, result, fields){
-		if(err) throw err;
-		res.send("success");
+	con.query("SELECT * FROM borrowed WHERE book_id="+mysql.escape(book_id)+";", function(err, result, fields){
+		//check if book is issued to anyone or not
+		if(result.length == 0){
+			res.status(404).send('Book is not issued to anyone');
+		} else{
+			con.query("DELETE FROM borrowed WHERE book_id="+mysql.escape(book_id)+";", function(err, result, fields){
+				if(err) throw err;
+				res.send("success");
+			});
+		}
 	});
 });
 
@@ -176,6 +196,7 @@ app.get('/view_user/:id', (req, res)=>{
 			res.send("404");
 		}
 		else{
+			result1[0].password = "null";
 			con.query("SELECT * FROM borrowed WHERE user_id="+mysql.escape(id), function(err, result2, fields){
 				var items = 0, issued_book = [];
 				console.log(result2);
@@ -184,7 +205,7 @@ app.get('/view_user/:id', (req, res)=>{
 					items++;
 				}
 				console.log(issued_book);
-				res.render("users_list.ejs", {title:"Users", result1, issued_book});
+				res.render("user.ejs", {title:"Users", result1, issued_book});
 			});
 		}
 	})

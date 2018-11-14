@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%= title %></title>
+	<link rel="stylesheet" type="text/css" href="/CSS/user.css">
+	<script type="text/javascript"></script>
+</head>
+<body>
+	<div id="header">
+		<div style="float: left;">
+			<span style="color: #aaa">User ID:</span> <%= result1[0].user_id %><br>
+			<span style="color: #aaa">Author:</span> <%= result1[0].roll_no %><br>
+			<span style="color: #aaa">Branch:</span> <%= result1[0].branch %><br>
+			<span style="color: #aaa">Issued Book:</span> <%= issued_book.length %><br>
+		</div>
+		<center><h1 style="color: #00d8ff;"><%= result1[0].name %></h1></center>
+	</div>
+
+	<div class="books_cont">
+		<% for(var i = 0; i < issued_book.length; i++){ %>
+		<div class="book_cont">
+			<span style="color: #aaa">Book ID:</span> <%= issued_book[i].book_id %><br>
+			<span style="color: #aaa">Due Date:</span> <%= issued_book[i].due_date %><br>
+			<button value="<%= issued_book[i].book_id %>" class="return_btn">Return Book</button><br clear="all">
+		</div>
+		<% } %>
+	</div>
+
+
+	
+</body>
+<script type="text/javascript" src="/JS/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".return_btn").click(function(e){
+		e.preventDefault();
+		var book_id = $(this).val();
+
+		$.ajax({
+			type: 'DELETE',
+			url: '/return_book',
+			data: {book_id},
+			success: function() {
+				window.location.reload();
+			},
+			error: function(error) {	
+				console.log(error);	
+				alert(error.responseText);
+				console.log(error.responseText);
+			}
+		});
+	});
+
+});
+</script>
+</html>

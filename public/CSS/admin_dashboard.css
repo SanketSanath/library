@@ -33,8 +33,8 @@ p{
 }
 
 h2{ text-align: center; color: #00d8ff; margin-top: 0px; margin-bottom: 0px; }
-#inner_div1, #inner_div3, #inner_div5, #inner_div7{ float: right; margin-bottom: 10px;}
-#inner_div2, #inner_div4, #inner_div6, #inner_div8{ float: left; margin-bottom: 10px;}
+#inner_div1, #inner_div3, #inner_div5, #inner_div7, #inner_div9{ float: right; margin-bottom: 10px;}
+#inner_div2, #inner_div4, #inner_div6, #inner_div8, #inner_div10 { float: left; margin-bottom: 10px;}
 
 input{
 	background-color: transparent;
@@ -61,7 +61,7 @@ button{
 }
 
 
-#add_book, #add_user, #update_book, #update_user, #list_book, #list_user, #search_book, #search_user{
+#add_book, #add_user, #update_book, #update_user, #list_book, #list_user, #search_book, #search_user, #issue_book, #return_book{
 	display: none;
 }
 
