@@ -1,5 +1,47 @@
 $(document).ready(function() {
 
+	//issue book
+	$("#ib_button").click((e)=>{
+		e.preventDefault();
+		var book_id = $("#ib_book_id").val(), issue_to = $("#ib_user_id").val(); $("#ib_book_id").val(''); $("#ib_user_id").val('');
+		
+		var data = {book_id, issue_to};
+		$.ajax({
+			type: 'POST',
+			url: '/issue_book',
+			data,
+			success: function(responseText) {
+				alert('issued successfully');
+			},
+			error: function(error) {	
+				console.log(error);	
+				alert(error.responseText);
+				console.log(error.responseText);
+			}
+		});
+
+	});
+
+	//return book
+	$("#rb_button").click((e)=>{
+		e.preventDefault();
+		var book_id = $("#rb_book_id").val(); $("#rb_book_id").val('');
+		console.log(book_id);
+
+		$.ajax({
+			type: 'DELETE',
+			url: '/return_book',
+			data: {book_id},
+			success: function(responseText) {
+				alert(responseText);
+			},
+			error: function(error) {	
+				console.log(error);	
+				alert(error.responseText);
+				console.log(error.responseText);
+			}
+		});
+	});
 
 	//add book
 	$("#ab_button").click((e)=>{

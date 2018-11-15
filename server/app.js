@@ -159,20 +159,32 @@ app.post('/issue_book', (req, res)=>{
 		if(result.length == 0){
 			res.status(400).send('User doesnot exists');
 		} else{
-			//check if book is already issued or not
-			con.query("SELECT * FROM borrowed WHERE book_id="+mysql.escape(book_id)+";", function(err, result, fields){
-				if(result.length==0){
-					con.query("INSERT INTO borrowed VALUES ("+mysql.escape(issue_to)+","+mysql.escape(book_id)+",DATE_ADD(CURDATE(), INTERVAL 7 DAY))", function(err, result, fields){
-						if(err) throw err;
-						res.send("success");
-					});
-				} else{
-					res.status(409).send('Book already issued');
+			con.query("SELECT * FROM library_books WHERE book_id ="+book_id, function(err, result, fields){
+				if (err) throw err;
+				//check if book exist or not
+				if(result.length == 0){
+					//book doesn't exist
+					res.status(400).send('Book doesnot exist');
+				} else {
+					//book exist
+					//check if book is already issued or not
+					con.query("SELECT * FROM borrowed WHERE book_id="+mysql.escape(book_id)+";", function(err, result, fields){
+						if(result.length==0){
+							con.query("INSERT INTO borrowed VALUES ("+mysql.escape(issue_to)+","+mysql.escape(book_id)+",DATE_ADD(CURDATE(), INTERVAL 7 DAY))", function(err, result, fields){
+								if(err) throw err;
+								res.send("success");
+							});
+						} else{
+							res.status(409).send('Book already issued');
+						}
+					})
 				}
 			})
+			
 		}
 	});
 });
+
 
 //return book to library
 app.delete('/return_book', (req, res)=>{
