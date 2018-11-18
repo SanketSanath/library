@@ -30,6 +30,7 @@ p{
 	color: #eee;
 	width: 400px;
 	padding: 30px;
+	display: inline-block;
 }
 
 h2{ text-align: center; color: #00d8ff; margin-top: 0px; margin-bottom: 0px; }
@@ -61,7 +62,7 @@ button{
 }
 
 
-#add_book, #add_user, #update_book, #update_user, #list_book, #list_user, #search_book, #search_user, #issue_book, #return_book{
+#add_book, #add_user, #update_book, #update_user, #list_book, #list_user, #search_book, #search_user, #issue_book, #return_book, #collect_fine {
 	display: none;
 }
 
@@ -69,3 +70,8 @@ button{
 	cursor: pointer;
 }
 
+
+input[type=radio],
+input.radio {
+  width: auto;
+}

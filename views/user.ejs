@@ -16,6 +16,9 @@
 		<center><h1 style="color: #00d8ff;"><%= result1[0].name %></h1></center>
 	</div>
 
+	<%if (issued_book.length > 0) { %>
+
+
 	<div class="books_cont">
 		<% for(var i = 0; i < issued_book.length; i++){ %>
 		<div class="book_cont">
@@ -23,6 +26,13 @@
 			<span style="color: #aaa">Due Date:</span> <%= issued_book[i].due_date %><br>
 			<button value="<%= issued_book[i].book_id %>" class="return_btn">Return Book</button><br clear="all">
 		</div>
+		<% } %>
+		<% } %>
+
+		<%if (issued_book.length <= 0) { %>
+			<div class="books_cont">
+				No books borrowed
+			</div>
 		<% } %>
 	</div>
 

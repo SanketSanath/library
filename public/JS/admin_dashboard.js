@@ -85,9 +85,25 @@ $(document).ready(function() {
 	//search book
 	$("#sb_button").click((e)=>{
 		e.preventDefault();
-		var isbn = $("#sb_isbn").val(); $("#sb_isbn").val('');
-		window.location.href = "/book/"+isbn;
+		console.log("doing")
+		var isbn = $("#sb_isbn").val(); 
+		$("#sb_isbn").val('');
+
+		var ch = $('input[name=sb_type]:checked').val();
+		console.log(ch);
+		if(ch=='isbn')
+			window.location.href = "/admin/book/"+isbn;
+		else if(ch=='name')
+			window.location.href = "/admin/book_name/"+isbn;
+		else if(ch=='author')
+			window.location.href = "/admin/book_author/"+isbn;
 	});
+
+	//search radio
+	$("#sb_type").change((e)=>{
+		var val = $('input[name=sb_type]:checked').val();
+		 $("#sb_isbn").placeholder(val);
+	})
 
 	//add user
 	$("#au_button").click(function(e){
@@ -124,6 +140,7 @@ $(document).ready(function() {
 		console.log('update user: ', user_id, user_pass);
 	});
 
+
 	//list user
 	$("#lu_button").click(function(e){
 		e.preventDefault();
@@ -137,6 +154,57 @@ $(document).ready(function() {
 		window.location.href = "/view_user/"+user_id;
 
 		console.log("search_user: ", user_id);
+	});
+
+	//update user
+	$("#cf_button").click(function(e){
+		e.preventDefault();
+		var user_id = $("#cf_user_id").val();
+		if($("#cf_button").text()==='Submit Fine') {
+			var submitted = $('#cf_submitted_fine').val();
+			$('#cf_submitted_fine').val('');
+			var data ={ submitted, user_id };
+			$.ajax({
+			type: 'POST',
+			url: '/submit_fine',
+			data,
+			success: function(value) {
+				$("#cf_user_id").val('');
+				$('#cf_due_fine').val('');
+				$('#cf_due_fine').hide()
+				$('#cf_submitted_fine').css('style', 'display: none;')
+				$('#cf_submitted_fine').hide()
+				$("#cf_button").text('Get Fine')
+				alert('Fine reduced')
+			},
+			error: function(error) {	
+				console.log(error);	
+				alert(error.responseText);
+				console.log(error.responseText);
+			}
+		});
+			return;
+		}
+		
+		var data ={ user_id };
+		$.ajax({
+			type: 'POST',
+			url: '/get_fine',
+			data,
+			success: function(value) {
+				console.log('Done')
+				var fine = (value.fine);
+				$('#cf_due_fine').show()
+				$('#cf_due_fine').text('Due fine is: '+fine);
+				$('#cf_submitted_fine').show()
+				$("#cf_button").text('Submit Fine')
+			},
+			error: function(error) {	
+			console.log(error);	
+				alert(error.responseText);
+				console.log(error.responseText);
+			}
+		});
 	});
 
 
@@ -155,6 +223,10 @@ $(document).ready(function() {
 
 	$('#expand_add_book').click(function() {
 		$('#add_book').toggle(500);
+	});
+
+	$('#expand_collect_fine').click(function() {
+		$('#collect_fine').toggle(500);
 	});
 
 
