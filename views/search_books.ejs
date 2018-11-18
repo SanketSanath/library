@@ -1,0 +1,78 @@
+<html>
+	<head>
+		<title>
+			Search books
+		</title>
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+		<style type="text/css">
+			
+input[type=radio],
+input.radio {
+  width: auto;
+}
+h2{ text-align: center; color: #00d8ff; margin-top: 0px; margin-bottom: 0px; }
+input{
+	background-color: transparent;
+	color: white;
+	border: 0px;
+	border-bottom: 2px solid white;
+	width: 100%;
+	padding: 5px;
+	margin-bottom: 20px;
+}
+body {
+	background-color: #222;
+	color: #eee;
+	width: 400px;
+	padding: 30px;
+	display: inline-block;
+}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+		<h2>Search Book</h2>
+			<form id="search_book">
+				<input type="text" id="sb_isbn" placeholder="ISBN" required /="true"><br>
+				<input type="radio" name="sb_type" checked="true" value="isbn">
+				<label for="isbn">ISBN</label>
+				<br/>
+				<input type="radio" name="sb_type" value="name">
+				<label for="name">Book Name</label>
+				<br/>
+				<input type="radio" name="sb_type" value="author">
+				<label for="author">Author</label>
+				<br/>
+
+				<div style="text-align: center;">
+					<button id="sb_button">Search Book</button>
+				</div>
+			</form>
+		</div>
+	</body>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#sb_button").click((e)=>{
+				e.preventDefault();
+				console.log("doing")
+				var isbn = $("#sb_isbn").val(); 
+				$("#sb_isbn").val('');
+
+				var ch = $('input[name=sb_type]:checked').val();
+				console.log(ch);
+				if(ch=='isbn')
+					window.location.href = "/user/book/"+isbn;
+				else if(ch=='name')
+					window.location.href = "/user/book_name/"+isbn;
+				else if(ch=='author')
+					window.location.href = "/user/book_author/"+isbn;
+			});
+			//search radio
+			$("#sb_type").change((e)=>{
+				var val = $('input[name=sb_type]:checked').val();
+				 $("#sb_isbn").placeholder(val);
+			});
+		});
+	</script>
+</html>

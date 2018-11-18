@@ -6,6 +6,12 @@
 </head>
 <body>
 	<div id="header">
+
+		<div style="float: right; align-content: center;">
+			<a href="/logout" style="padding: 10px; background-color:#ddd; text-decoration: none; color:#000;" id="logout">Log out</a>
+
+		</div>
+
 		<h1>Admin Dashboard</h1>
 	</div>
 	
@@ -64,11 +70,38 @@
 			<h2>Search Book</h2>
 			<form id="search_book">
 				<input type="text" id="sb_isbn" placeholder="ISBN" required /="true"><br>
+				<input type="radio" name="sb_type" checked="true" value="isbn">
+				<label for="isbn">ISBN</label>
+				<br/>
+				<input type="radio" name="sb_type" value="name">
+				<label for="name">Book Name</label>
+				<br/>
+				<input type="radio" name="sb_type" value="author">
+				<label for="author">Author</label>
+				<br/>
+
 				<div style="text-align: center;">
 					<button id="sb_button">Search Book</button>
 				</div>
 			</form>
 		</div>
+
+		<div class="inner_div" id="inner_div3">
+			<img class="expand" id="expand_collect_fine" src="/expand.svg" width="20px" height="20px" style="float: right;">
+			<h2>Collect Fine</h2>
+			<form id="collect_fine">
+				<input type="text" id="cf_user_id" placeholder="User ID" required /><br>
+				<div id="cf_due_fine" style="display: none; margin-bottom: 20px; padding: 3px; text-align: center;">
+				Due fine
+				</div>
+				<input style="display: none;" type="text" id="cf_submitted_fine" placeholder="Fine submitted" /><br>
+				<div style="text-align: center;">
+					<button id="cf_button">Get fine</button>
+				</div>
+			</form>
+		</div>
+
+
 		
 	</div>
 
@@ -81,7 +114,7 @@
 			<img class="expand" id="expand_return_book" src="/expand.svg" width="20px" height="20px" style="float: right;">
 			<h2>Return Book</h2>
 			<form id="return_book">
-				<input type="text" id="rb_book_id" placeholder="User ID" required /><br>
+				<input type="text" id="rb_book_id" placeholder="Book ID" required /><br>
 
 				<div style="text-align: center;">
 					<button id="rb_button" type="submit">Return Book</button>

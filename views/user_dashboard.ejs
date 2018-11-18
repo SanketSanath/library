@@ -2,99 +2,72 @@
 <html>
 <head>
 	<title><%= title %></title>
-	<link rel="stylesheet" type="text/css" href="/CSS/admin_dashboard.css">
+	<link rel="stylesheet" type="text/css" href="/CSS/user.css">
+	<script type="text/javascript"></script>
 </head>
 <body>
 	<div id="header">
-		<h1>Admin Dashboard</h1>
+
+		<div style="float: right; align-content: center;">
+			<a href="/logout" style="padding: 10px; background-color:#ddd; text-decoration: none; color:#000;" id="logout">Log out</a>
+
+		</div>
+		<div style="float: left;">
+			<span style="color: #aaa">User ID:</span> <%= user_id %><br>
+			<span style="color: #aaa">Roll No.:</span> <%= result[0].roll_no %><br>
+			<span style="color: #aaa">Branch:</span> <%= result[0].branch %><br>
+			<span style="color: #aaa">Due fine:</span> <%= result[0].due_fines %><br>
+
+		</div>
+		<center><h1 style="color: #00d8ff;">Welcome <%= result[0].name %>!</h1></center>
+
 	</div>
+
+		<div id="search_button" style="padding: 20px; text-align: center; width: 100%">
+			<span  style="cursor: pointer; font-size: 24px; padding: 10px; background-color: #000;"> Search books </span>
+		</div>
+
+	<%if (issued_book.length > 0) { %>
+
+
+	<div class="books_cont">
+
+
+
+					<span style="color: #aaa">Number of issued books:</span> <%= issued_book.length %><br>
+					<br>
+		<% for(var i = 0; i < issued_book.length; i++){ %>
+		<div class="book_cont">
+			<span style="color: #aaa">Book Name:</span> <%= issued_book[i].name %><br>
+			<span style="color: #aaa">Author:</span> <%= issued_book[i].author %><br>
+			<span style="color: #aaa">ISBN:</span> <%= issued_book[i].isbn %><br>
+			<span style="color: #aaa">Book ID:</span> <%= issued_book[i].book_id %><br>
+			<span style="color: #aaa">Due Date:</span> <%= issued_book[i].due_date %><br>
+		</div>
+		<% } %>
+
+		<% } %>
+
+		<%if (issued_book.length <= 0) { %>
+			<div class="books_cont">
+				No books borrowed
+			</div>
+		<% } %>
+
+
+
+	</div>
+
+
+
 	
-	<div id="div1">
-		<div class="inner_div" id="inner_div1">
-			<img class="expand" id="expand_add_book" src="/expand.svg" width="20px" height="20px" style="float: right;">
-			<h2>Add Book</h2>
-			<div id="add_book">
-				<input type="text" id="admin_id" placeholder="ISBN"><br>
-				<input type="password" id="admin_pass" placeholder="Book Name"><br>
-				<input type="password" placeholder="Author Name"><br>
-				<div style="text-align: center;">
-					<button id="admin_login">Admin Login</button>
-				</div>
-			</div>
-		</div>
-
-		<div class="inner_div" id="inner_div3">
-			<img class="expand" id="expand_update_book" src="/expand.svg" width="20px" height="20px" style="float: right;">
-			<h2>Update Book</h2>
-			<div id="update_book">
-				<input type="text" placeholder="Admin ID"><br>
-				<input type="password" placeholder="Password"><br>
-				<div style="text-align: center;">
-					<button>Update Book</button>
-				</div>
-			</div>
-		</div>
-
-		<div class="inner_div" id="inner_div5">
-			<img class="expand" id="expand_list_book" src="/expand.svg" width="20px" height="20px" style="float: right;">
-			<h2>List Book</h2>
-			<div id="list_book">
-				<input type="text" placeholder="Admin ID"><br>
-				<input type="password" placeholder="Password"><br>
-				<div style="text-align: center;">
-					<button>List Book</button>
-				</div>
-			</div>
-		</div>
-		
-	</div>
-
-	<div id="div2">
-		<div class="inner_div" id="inner_div2">
-			<img class="expand" id="expand_add_user" src="/expand.svg" width="20px" height="20px" style="float: right;">
-			<h2>Add User</h2>
-			<div id="add_user">
-				<input type="text" id="stu_id" placeholder="User ID"><br>
-				<input type="text" placeholder="User Name"><br>
-				<input type="text" placeholder="User Dept."><br>
-				<input type="text" placeholder="User Password"><br>
-
-				<div style="text-align: center;">
-					<button id="stu_login">User Login</button>
-				</div>
-			</div>
-		</div>
-
-		<div class="inner_div" id="inner_div4">
-			<img class="expand" id="expand_update_user" src="/expand.svg" width="20px" height="20px" style="float: right;">
-			<h2>Update User</h2>
-			<div id="update_user">
-				<input type="text" placeholder="User ID"><br>
-				<input type="password" placeholder="Password"><br>
-				<div style="text-align: center;">
-					<button>Update User</button>
-				</div>
-			</div>
-		</div>
-
-		<div class="inner_div" id="inner_div6">
-			<img class="expand" id="expand_list_user" src="/expand.svg" width="20px" height="20px" style="float: right;">
-			<h2>List User</h2>
-			<div id="list_user">
-				<input type="text" placeholder="User ID"><br>
-				<input type="password" placeholder="Password"><br>
-				<div style="text-align: center;">
-					<button>List User</button>
-				</div>
-			</div>
-		</div>
-
-	</div>
-	<br clear="all">
-	<br clear="all">
-
 </body>
 <script type="text/javascript" src="/JS/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="/JS/jquery_rotate.js"></script>
-<script type="text/javascript" src="/JS/admin_dashboard.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#search_button').click((e)=>{
+			window.location='/search_books'
+		})
+	})
+</script>
 </html>

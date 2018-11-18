@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%= title %></title>
+	<link rel="stylesheet" type="text/css" href="/CSS/book.css">
+	<script type="text/javascript"></script>
+</head>
+<body>
+	<div id="header">
+		<center><h1 style="color: #00d8ff;">Search results</h1></center>
+	</div>
+	
+	<div class="books_cont">
+	<% for(var i = 0; i < issued_book.length; i++){ %>
+		<% if(issued_book[i].user_id == null){ %>
+		<div class="book_cont">
+			<span style="color: #aaa">Book name:</span> <%= issued_book[i].name %>
+			<br>
+			<span style="color: #aaa">Author:</span> <%= issued_book[i].author %>
+			<br>
+			<span style="color: #aaa">Book ID:</span> <%= issued_book[i].book_id %>
+			<br>
+			<span style="float: right; background-color: green; color: #fff; font-weight: bold; padding: 3px;">Book Available</span><br clear="all">
+		</div>
+		<% } else {%>
+		<div class="book_cont">
+
+			<span style="color: #aaa">Book ID:</span> <%= issued_book[i].book_id %>
+			<span style="float: right; background-color: #ff4800; color: #fff; font-weight: bold;  padding: 3px;">Unavailable</span><br clear="all">
+			<span style="color: #aaa">Due Date:</span> <%= issued_book[i].due_date %><br>
+
+		</div>
+		<% } %>
+	<% } %>
+	</div>
+
+</body>
+<script type="text/javascript" src="/JS/jquery-3.3.1.min.js"></script>
+</html>

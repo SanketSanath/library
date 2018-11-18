@@ -68,7 +68,8 @@
 			$.ajax({
 				type: 'POST',
 				url: '/user/login',
-				data,success: function() {
+				data,
+				success: function() {
 					window.location = "/user/dashboard";
 				},
 				error: function(error) {	
