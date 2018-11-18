@@ -233,7 +233,7 @@ app.get('/admin/book_name/:name',isAdmin, (req, res)=>{
 app.get('/admin/book_author/:author', isAdmin, (req, res)=>{
 	var authorPattern = req.params.author;
 
-	con.query("SELECT * FROM books WHERE name like "+mysql.escape('%'+authorPattern+'%'), function(err, result1, fields){
+	con.query("SELECT * FROM books WHERE author like "+mysql.escape('%'+authorPattern+'%'), function(err, result1, fields){
 		if(err)
 			throw err;
 
@@ -349,7 +349,7 @@ app.get('/user/book_name/:name',isUser, (req, res)=>{
 app.get('/user/book_author/:author', isUser, (req, res)=>{
 	var authorPattern = req.params.author;
 
-	con.query("SELECT * FROM books WHERE name like "+mysql.escape('%'+authorPattern+'%'), function(err, result1, fields){
+	con.query("SELECT * FROM books WHERE author like "+mysql.escape('%'+authorPattern+'%'), function(err, result1, fields){
 		if(err)
 			throw err;
 
