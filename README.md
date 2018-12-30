@@ -1,11 +1,11 @@
 # Library Management System
-***
+
 Provide a user friendly system to track and manage books and their associated information in a library.
 
 Throughout the project the focus has been on presenting information in an easy and intelligible manner. The project is very useful for tracking books in library.
 
 ## Feature
-***
+
 * Different logins for students and admins.
 * Admin can access the following features:
 	1. Add and update books.
@@ -19,7 +19,7 @@ Throughout the project the focus has been on presenting information in an easy a
 	4. Find out fine to be paid
 
 ## Setup
-***
+
 Download and extract the project repository. Install all the software requirements.
 
 To import the library database open mysql and use command
@@ -37,7 +37,7 @@ Now everything is set and you are ready to go. Run node server by
     $ node server/app.js
 
 ## Future
-***
+
 These features are yet to be implemented
 
 * Password encription.
