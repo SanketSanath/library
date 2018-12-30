@@ -10,6 +10,8 @@ var sess = {
   cookie: { maxAge: 3600000 }
 };
 
+var bcrypt;
+var hashedpassword = "$2a$10$SggkNaXvWO7IWmjFPHirSuc4AaH.dLBubYZhd67Wo2cgGMN6kZu5W";
 
 const app = express();
 
@@ -413,7 +415,8 @@ app.post('/get_fine',isAdmin, (req, res)=>{
 app.get('/book_list', (req, res)=>{
 	con.query("SELECT * FROM books;", function(err, result, fields){
 		if(err) throw err;
-		res.json({fine : result[0].due_fines});
+		// res.json({fine : result[0].due_fines});
+		res.render('book_list.ejs', {books : result});
 	});
 });
 
