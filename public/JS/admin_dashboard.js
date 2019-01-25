@@ -44,9 +44,11 @@ $(document).ready(function() {
 	});
 
 	//add book
+	/*
 	$("#ab_button").click((e)=>{
 		e.preventDefault();
 		var book_isbn = $("#ab_isbn").val(), book_name = $("#ab_book_name").val(), book_author = $("#ab_author").val(), book_q = $("#ab_book_q").val();
+		var section = $("#ab_section").val(), sub_section = $("#ab_sub_section").val();
 		$("#ab_isbn").val(''); $("#ab_book_name").val(''); $("#ab_author").val(''); $("#ab_book_q").val('');
 		var data = {book_isbn, book_name, book_author, book_q};
 		$.ajax({
@@ -67,6 +69,7 @@ $(document).ready(function() {
 
 		console.log('add book: ', book_isbn, book_name, book_author, book_q);
 	});
+	*/
 
 	//update book
 	$("#ub_button").click((e)=>{

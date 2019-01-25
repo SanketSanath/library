@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql');
 var session = require('express-session');
 const bcrypt = require('bcryptjs');
+const fs = require('fs');
+const upload = require('express-fileupload');
 
 var sess = {
   secret: 'library secret. cant guess',
@@ -15,6 +17,7 @@ var sess = {
 
 const app = express();
 
+app.use(upload());
 app.use(express.static(__dirname+'/../public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session(sess))
@@ -103,16 +106,35 @@ app.post('/user/login', (req, res)=>{
 });
 
 app.post('/add_book',isAdmin, (req,res)=> {
+	console.log("Entered add book");
 	var book_isbn = req.body.book_isbn;
 	var book_name = req.body.book_name;
 	var book_author = req.body.book_author;
 	var book_q = req.body.book_q;
+	var section = req.body.section;
+	var sub_section = req.body.sub_section;
+	var file_url = "NULL";
+
+
 	con.query("SELECT * FROM books WHERE isbn="+mysql.escape(book_isbn), function (err, result, fields) {
 		if(err)
 			throw err;
 		if(typeof result == 'undefined' || result.length==0) {
 			var items=0;
-			con.query("INSERT INTO books values ("+mysql.escape(book_isbn)+","+mysql.escape(book_name)+","+mysql.escape(book_author)+")", function(err, result,fields) {
+			//upload e-book
+			if (Object.keys(req.files).length != 0) {
+				var salt = bcrypt.genSaltSync(10);
+				var sampleFile = req.files.pdf_file;
+				var file_url = (+new Date())+sampleFile.name.replace(/\s/g, '');
+				console.log(file_url);
+		    	sampleFile.mv(__dirname+'/../ebooks/'+file_url, function(err) {
+			    if (err)
+			      return res.status(500).send(err);
+
+			    //res.send('File uploaded!');
+			  });
+		  	}
+			con.query("INSERT INTO books values ("+mysql.escape(book_isbn)+","+mysql.escape(book_name)+","+mysql.escape(book_author)+","+mysql.escape(section)+","+mysql.escape(sub_section)+","+mysql.escape(file_url)+")", function(err, result,fields) {
 				var barray = [];
 				if(err)
 					throw err;
@@ -123,7 +145,8 @@ app.post('/add_book',isAdmin, (req,res)=> {
 						barray[items]=result[1][0].id;
 						items++;
 						if(items==book_q) {
-							res.json(barray);
+							// res.json(barray);
+							res.redirect('/barcodes/'+barray);
 						}
 					})
 				}
@@ -144,7 +167,7 @@ app.post('/add_user',isAdmin, (req, res)=>{
 			throw err;
 		if(typeof result == 'undefined' || result.length == 0){
 			var salt = bcrypt.genSaltSync(10);
-			con.query("INSERT INTO users values ("+mysql.escape(id)+","+mysql.escape(bcrypt.hashSync(pass, salt))+","+mysql.escape(name)+","+mysql.escape(dept)+","+mysql.escape(roll)+", 2);", function(err, result, fields){
+			con.query("INSERT INTO users values ("+mysql.escape(id)+","+mysql.escape(bcrypt.hashSync(pass, salt))+","+mysql.escape(name)+","+mysql.escape(dept)+","+mysql.escape(roll)+", 2, 0);", function(err, result, fields){
 				if(err)
 					throw err;
 				res.send('inserted');

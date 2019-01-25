@@ -32,13 +32,17 @@
 		<div class="inner_div" id="inner_div1">
 			<img class="expand" id="expand_add_book" src="/expand.svg" width="20px" height="20px" style="float: right;">
 			<h2>Add Book</h2>
-			<form id="add_book">
-				<input type="text" id="ab_isbn" placeholder="ISBN" required /><br>
-				<input type="text" id="ab_book_name" placeholder="Book Name" required /><br>
-				<input type="text" id="ab_author" placeholder="Author Name" required /><br>
-				<input type="number" id="ab_book_q" placeholder="Book Quantity" required /><br>
+			<form id="add_book" method="POST" enctype="multipart/form-data" action="/add_book">
+				<input type="text" id="ab_isbn" name="book_isbn" placeholder="ISBN" required /><br>
+				<input type="text" id="ab_book_name" name="book_name" placeholder="Book Name" required /><br>
+				<input type="text" id="ab_author" name="book_author" placeholder="Author Name" required /><br>
+				<input type="number" id="ab_book_q" name="book_q" placeholder="Book Quantity" required /><br>
+				<input type="text" id="ab_section" name="section" placeholder="Section" /><br>
+				<input type="text" id="ab_sub_section" name="sub_section" placeholder="Sub Section" /><br>
+				<input type="file" id="ab_url" name="pdf_file" placeholder="Upload E-book" /><br>
+
 				<div style="text-align: center;">
-					<button id="ab_button">Add Book</button>
+					<button id="ab_button" type="submit">Add Book</button>
 				</div>
 			</form>
 		</div>
