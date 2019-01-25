@@ -94,8 +94,10 @@ body {
     		type: 'POST',
     		url: '/search_tags',
     		data,
-    		success: function() {
-				window.location.reload();
+    		success: function(str) {
+    			console.log("success")
+    			console.log(str)
+    			window.location='/book_list?str='+str;
 			},
 			error: function(error) {	
 				alert("No books found for given tags");
