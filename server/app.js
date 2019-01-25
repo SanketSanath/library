@@ -441,11 +441,24 @@ app.post('/get_fine',isAdmin, (req, res)=>{
 });
 
 app.get('/book_list', (req, res)=>{
-	con.query("SELECT * FROM books;", function(err, result, fields){
-		if(err) throw err;
-		// res.json({fine : result[0].due_fines});
-		res.render('book_list.ejs', {books : result});
-	});
+	console.log("here");
+	if(req.body.str) {
+		//here
+		console.log(req.body.str);
+		con.query("SELECT * FROM books where isbn in ("+mysql.escape(req.body.str)+")", function(err, result, fields){
+			if(err) throw err;
+			con
+			// res.json({fine : result[0].due_fines});
+			res.render('book_list.ejs', {books : result});
+		});
+	}
+	else {
+		con.query("SELECT * FROM books;", function(err, result, fields){
+			if(err) throw err;
+			// res.json({fine : result[0].due_fines});
+			res.render('book_list.ejs', {books : result});
+		});
+	}
 });
 
 app.get('/user_list',isAdmin, (req, res)=>{
@@ -555,13 +568,14 @@ app.post('/search_tags',(req,res)=> {
 	con.query("SELECT * FROM book_tags where tag in ("+mysql.escape(req.body.str)+")", function(err,result1,fields) {
 		var tags = [];
 		if(result1.length>0) {
-			string str="";
+			var str="";
 			for(var i = 0;i<result1.length-1;i++) {
 				str+=result1[i].isbn+","
 			}
 			str+=result1[result1.length-1].isbn;
 			//render these books
 			console.log(str);
+			res.send(str);
 		}
 		else {
 			res.status(404).json({empty: true});

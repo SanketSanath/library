@@ -38,6 +38,7 @@ CREATE TABLE `book_tags` (
 
 LOCK TABLES `book_tags` WRITE;
 /*!40000 ALTER TABLE `book_tags` DISABLE KEYS */;
+INSERT INTO `book_tags` VALUES ('1',1);
 /*!40000 ALTER TABLE `book_tags` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -65,6 +66,7 @@ CREATE TABLE `books` (
 
 LOCK TABLES `books` WRITE;
 /*!40000 ALTER TABLE `books` DISABLE KEYS */;
+INSERT INTO `books` VALUES ('1','1','1','1','1','1548431389697output.json');
 /*!40000 ALTER TABLE `books` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -108,7 +110,7 @@ CREATE TABLE `library_books` (
   PRIMARY KEY (`book_id`),
   KEY `isbn` (`isbn`),
   CONSTRAINT `library_books_ibfk_1` FOREIGN KEY (`isbn`) REFERENCES `books` (`isbn`)
-) ENGINE=InnoDB AUTO_INCREMENT=446 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=447 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -117,6 +119,7 @@ CREATE TABLE `library_books` (
 
 LOCK TABLES `library_books` WRITE;
 /*!40000 ALTER TABLE `library_books` DISABLE KEYS */;
+INSERT INTO `library_books` VALUES (446,'1');
 /*!40000 ALTER TABLE `library_books` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -131,7 +134,7 @@ CREATE TABLE `tag_names` (
   `tag` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`tag`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -140,6 +143,7 @@ CREATE TABLE `tag_names` (
 
 LOCK TABLES `tag_names` WRITE;
 /*!40000 ALTER TABLE `tag_names` DISABLE KEYS */;
+INSERT INTO `tag_names` VALUES (1,'Physics'),(2,'Chemistry');
 /*!40000 ALTER TABLE `tag_names` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -158,6 +162,8 @@ CREATE TABLE `users` (
   `roll_no` int(11) DEFAULT NULL,
   `type` int(11) NOT NULL,
   `due_fines` int(11) NOT NULL DEFAULT '0',
+  `validity` date NOT NULL DEFAULT '9999-01-01',
+  `email` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -168,7 +174,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('admin','$2a$10$mRJj7YSplsw6KyEFKEJXduZPV1B1Ro3Lj846Bi/eThUDAVqCiVPo.','Administrator',NULL,NULL,1,0),('rituraj','$2a$10$mRJj7YSplsw6KyEFKEJXdu1XdU7ynoxoh8QA7hbtsE1Tmrj5amcGu','Ritu Raj','IT',1607005,2,0),('sanket','$2a$10$mRJj7YSplsw6KyEFKEJXduKFmkaUj.wjKs77kNQYO3neylgCKe1V2','SAnket SAnath','IT',1607008,2,0),('user','$2a$10$mRJj7YSplsw6KyEFKEJXduOHAdlYTw8TGlzbpMzlLfSN8A4ZAyNca','Test user','0',0,2,0);
+INSERT INTO `users` VALUES ('admin','$2a$10$mRJj7YSplsw6KyEFKEJXduZPV1B1Ro3Lj846Bi/eThUDAVqCiVPo.','Administrator',NULL,NULL,1,0,'9999-01-01',NULL),('rituraj','$2a$10$mRJj7YSplsw6KyEFKEJXdu1XdU7ynoxoh8QA7hbtsE1Tmrj5amcGu','Ritu Raj','IT',1607005,2,0,'9999-01-01',NULL),('sanket','$2a$10$mRJj7YSplsw6KyEFKEJXduKFmkaUj.wjKs77kNQYO3neylgCKe1V2','SAnket SAnath','IT',1607008,2,0,'9999-01-01',NULL),('temp','$2a$10$KazmNDQHwc4GWJtvxveQpevoOBbL/o9xHHPWIbLaw84MLjtJbmiJO','temp','temp',1,2,0,'9999-01-01',NULL),('user','$2a$10$mRJj7YSplsw6KyEFKEJXduOHAdlYTw8TGlzbpMzlLfSN8A4ZAyNca','Test user','0',0,2,0,'9999-01-01',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -181,4 +187,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-25 15:47:12
+-- Dump completed on 2019-01-26  1:02:32
