@@ -3,7 +3,6 @@
 <head>
 	<title><%= title %></title>
 	<link rel="stylesheet" type="text/css" href="/CSS/user.css">
-	<script type="text/javascript"></script>
 </head>
 <body>
 	<div id="header">
@@ -29,6 +28,10 @@
 
 		<div id="search_tag_button" style="padding: 20px; text-align: center; width: 100%">
 			<span  style="cursor: pointer; font-size: 24px; padding: 10px; background-color: #000;"> Search books by tags</span>
+		</div>
+
+		<div id="e_lib_button" style="padding: 20px; text-align: center; width: 100%">
+			<span  style="cursor: pointer; font-size: 24px; padding: 10px; background-color: #000;">Enter E-Library</span>
 		</div>
 
 	<%if (issued_book.length > 0) { %>
@@ -75,6 +78,10 @@
 
 		$('#search_tag_button').click((e)=>{
 			window.location='/search_tags'
+		})
+
+		$('#e_lib_button').click((e)=>{
+			window.location='/elib'
 		})
 	})
 </script>

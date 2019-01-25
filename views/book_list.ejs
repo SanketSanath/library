@@ -16,10 +16,15 @@
 	<% for(var i = 0; i < books.length; i++){ %>
 		<div class="book_cont">
 
-			<button value="<%= books[i].isbn %>" class="return_btn" style="float: right; width: 25%;">Search Book</button>
+			<% if(books[i].url){ %>
+				<button value="<%= result[i].isbn %>" class="return_btn" style="float: right; width: 25%;">Read Online</button>
+			<% } %>
+
+			<button value="<%= books[i].isbn %>" class="return_btn" style="float: right; width: 25%;">View Availability</button>
 			<span style="color: #aaa">ISBN:</span> <%= books[i].isbn %><br>
 			<span style="color: #aaa">Book Name:</span> <%= books[i].name %><br>
 			<span style="color: #aaa">Author:</span> <%= books[i].author %><br>
+			<span style="color: #aaa">Location:</span> <%= books[i].section %>(sec),  <%= books[i].sub_section %>(sub-sec)<br>
 			
 		</div>
 	<% } %>

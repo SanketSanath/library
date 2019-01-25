@@ -555,7 +555,7 @@ app.post('/search_tags',(req,res)=> {
 	con.query("SELECT * FROM book_tags where tag in ("+mysql.escape(req.body.str)+")", function(err,result1,fields) {
 		var tags = [];
 		if(result1.length>0) {
-			string str="";
+			var str="";
 			for(var i = 0;i<result1.length-1;i++) {
 				str+=result1[i].isbn+","
 			}
@@ -636,6 +636,15 @@ app.get('/user/dashboard',isUser, (req, res)=>{
 		}
 	});
 });
+
+
+//elib dashboard
+app.get('/elib', isUser, (req, res)=>{
+	var user = req.session.user_id;
+	con.query("SELECT isbn, name, author, url from books where url IS NOT NULL", function(err, result, fields){
+		res.render('elib.ejs', {result, user});
+	})
+})
 
 app.listen(3000, ()=>{
 	console.log('server is running');
