@@ -1,7 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
-var session = require('express-session')
+var session = require('express-session');
+const bcrypt = require('bcryptjs');
 
 var sess = {
   secret: 'library secret. cant guess',
@@ -10,8 +11,7 @@ var sess = {
   cookie: { maxAge: 3600000 }
 };
 
-var bcrypt;
-var hashedpassword = "$2a$10$SggkNaXvWO7IWmjFPHirSuc4AaH.dLBubYZhd67Wo2cgGMN6kZu5W";
+
 
 const app = express();
 
@@ -55,7 +55,7 @@ app.post('/admin/login', (req, res)=>{
 	var user_id = req.body.admin_id;
 	var password = req.body.password;
 	console.log(user_id, password);
-	con.query("SELECT * FROM users WHERE user_id="+mysql.escape(user_id)+" AND password="+mysql.escape(password), function (err, result, fields) {
+	con.query("SELECT * FROM users WHERE user_id="+mysql.escape(user_id), function (err, result, fields) {
 		if(err)
 			throw err;
 		console.log(result);
@@ -65,7 +65,7 @@ app.post('/admin/login', (req, res)=>{
 		}
 		else {
 			console.log(result[0].type);
-			if(result[0].type==1) {
+			if(result[0].type==1 && bcrypt.compareSync(password, result[0].password)) {
 				req.session.user_id=user_id;
 				req.session.admin=1;
 				res.redirect("/admin/dashboard")
@@ -81,7 +81,7 @@ app.post('/user/login', (req, res)=>{
 	var user_id = req.body.user_id;
 	var password = req.body.password;
 	console.log(user_id, password);
-	con.query("SELECT * FROM users WHERE user_id="+mysql.escape(user_id)+" AND password="+mysql.escape(password), function (err, result, fields) {
+	con.query("SELECT * FROM users WHERE user_id="+mysql.escape(user_id), function (err, result, fields) {
 		if(err)
 			throw err;
 		console.log(result);
@@ -91,7 +91,7 @@ app.post('/user/login', (req, res)=>{
 		}
 		else {
 			console.log(result[0].type);
-			if(result[0].type==2) {
+			if(result[0].type==2 && bcrypt.compareSync(password, result[0].password)) {
 				req.session.user_id=user_id;
 				res.redirect("/user/dashboard")
 			}
@@ -143,7 +143,8 @@ app.post('/add_user',isAdmin, (req, res)=>{
 		if(err)
 			throw err;
 		if(typeof result == 'undefined' || result.length == 0){
-			con.query("INSERT INTO users values ("+mysql.escape(id)+","+mysql.escape(pass)+","+mysql.escape(name)+","+mysql.escape(dept)+","+mysql.escape(roll)+", 2);", function(err, result, fields){
+			var salt = bcrypt.genSaltSync(10);
+			con.query("INSERT INTO users values ("+mysql.escape(id)+","+mysql.escape(bcrypt.hashSync(pass, salt))+","+mysql.escape(name)+","+mysql.escape(dept)+","+mysql.escape(roll)+", 2);", function(err, result, fields){
 				if(err)
 					throw err;
 				res.send('inserted');
