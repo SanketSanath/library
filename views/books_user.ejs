@@ -24,10 +24,12 @@
 		</div>
 		<% } else {%>
 		<div class="book_cont">
-
+			<span style="color: #aaa">Book name:</span> <%= issued_book[i].name %>
+			<br>
+			<span style="color: #aaa">Author:</span> <%= issued_book[i].author %><br>
 			<span style="color: #aaa">Book ID:</span> <%= issued_book[i].book_id %>
 			<span style="float: right; background-color: #ff4800; color: #fff; font-weight: bold;  padding: 3px;">Unavailable</span><br clear="all">
-			<span style="color: #aaa">Due Date:</span> <%= issued_book[i].due_date %><br>
+			<span style="color: #aaa">Expected Available Date:</span> <%= issued_book[i].due_date %><br>
 
 		</div>
 		<% } %>
