@@ -24,7 +24,11 @@
 	</div>
 
 		<div id="search_button" style="padding: 20px; text-align: center; width: 100%">
-			<span  style="cursor: pointer; font-size: 24px; padding: 10px; background-color: #000;"> Search books </span>
+			<span  style="cursor: pointer; font-size: 24px; padding: 10px; background-color: #000;"> Search books by details</span>
+		</div>
+
+		<div id="search_tag_button" style="padding: 20px; text-align: center; width: 100%">
+			<span  style="cursor: pointer; font-size: 24px; padding: 10px; background-color: #000;"> Search books by tags</span>
 		</div>
 
 	<%if (issued_book.length > 0) { %>
@@ -67,6 +71,10 @@
 	$(document).ready(function() {
 		$('#search_button').click((e)=>{
 			window.location='/search_books'
+		})
+
+		$('#search_tag_button').click((e)=>{
+			window.location='/search_tags'
 		})
 	})
 </script>

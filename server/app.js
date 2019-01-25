@@ -349,6 +349,10 @@ app.get('/user/book_name/:name',isUser, (req, res)=>{
 	})
 });
 
+app.get('/user/book_tag/:tags', (req,res)=> {
+	a
+});
+
 app.get('/user/book_author/:author', isUser, (req, res)=>{
 	var authorPattern = req.params.author;
 
@@ -507,6 +511,39 @@ app.get('/logout',(req,res)=> {
 
 app.get('/search_books',(req,res)=> {
 	res.render('search_books.ejs');
+})
+
+app.get('/search_tags',(req,res)=> {
+	console.log("Getting tag");
+	con.query("SELECT * FROM tag_names", function(err,result1,fields) {
+		var tags = [];
+		if(err)
+			throw err;
+		for(var i = 0; i < result1.length; i ++) {
+			tags[i]=result1[i].name;
+		}
+		res.render('search_tags.ejs', {tags:tags});
+	})
+})
+
+app.post('/search_tags',(req,res)=> {
+	console.log(req.body);
+	console.log("SELECT * FROM book_tags where tag in ("+req.body.str+")");
+	con.query("SELECT * FROM book_tags where tag in ("+mysql.escape(req.body.str)+")", function(err,result1,fields) {
+		var tags = [];
+		if(result1.length>0) {
+			string str="";
+			for(var i = 0;i<result1.length-1;i++) {
+				str+=result1[i].isbn+","
+			}
+			str+=result1[result1.length-1].isbn;
+			//render these books
+			console.log(str);
+		}
+		else {
+			res.status(404).json({empty: true});
+		}
+	})
 })
 
 
