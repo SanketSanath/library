@@ -1,0 +1,145 @@
+<html>
+	<head>
+		<title>
+			Enter tags
+		</title>
+		<script src="/JS/jquery-3.3.1.min.js"></script>
+
+		<script src="/JS/jquery-ui.js"></script>
+
+    <link rel="stylesheet" href="/CSS/jquery-ui.css">
+    <style>
+        .ui-autocomplete {
+            max-height: 300px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        * html .ui-autocomplete {
+            height: 100px;
+        }
+        .extra {
+            width: 50px;
+        }
+    </style>
+		<style type="text/css">
+			
+input[type=radio],
+input.radio {
+  width: auto;
+}
+h2{ text-align: center; color: #00d8ff; margin-top: 0px; margin-bottom: 0px; }
+input{
+	background-color: transparent;
+	color: white;
+	border: 0px;
+	border-bottom: 2px solid white;
+	width: 100%;
+	padding: 5px;
+	margin-bottom: 20px;
+}
+body {
+	background-color: #222;
+	color: #eee;
+	width: 400px;
+	padding: 30px;
+	display: inline-block;
+}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+		<h2>Search Book</h2>
+			<div id="search_book">
+				<input type="text" id="sb_tag" placeholder="Tag" required /="true"><br>
+				<div style="text-align: center;">
+					<button id="sb_button">Search Book</button>
+				</div>
+			</div>
+		</div>
+	</body>
+	 <script>
+	 	var availableTags;
+  $( function() {
+    availableTags = split("<%=tags%>");
+
+
+
+	$("#sb_button").click((e)=>{
+		e.preventDefault();
+		console.log("test")
+		var value = $("#sb_tag").val();
+    	var selTags = split(value);
+    	console.log(selTags);
+    	var tags = [];
+    	for(var i = 0;i<availableTags.length;i++) {
+    		tags[availableTags[i]]=i+1;
+    	}
+    	var idTags=[];
+    	var i = 0;
+    	var str="";
+    	for(;i<selTags.length;i++) {
+    		if(typeof tags[selTags[i]] != 'undefined') {
+    			str+=tags[selTags[i]];
+    			i++;
+    			break;
+    		}
+    	}
+    	for(;i<selTags.length;i++) {
+    		if(typeof tags[selTags[i]] != 'undefined')
+    			str+=","+tags[selTags[i]];
+    	}
+    	console.log(str);
+    	var data ={str}
+    	$.ajax({
+    		type: 'POST',
+    		url: '/search_tags',
+    		data,
+    		success: function() {
+				window.location.reload();
+			},
+			error: function(error) {	
+				alert("No books found for given tags");
+			}
+    	})
+    });
+    function split( val ) {
+      return val.split( /,\s*/ );
+    }
+    function extractLast( term ) {
+      return split( term ).pop();
+    }
+ 
+    $( "#sb_tag" )
+      // don't navigate away from the field on tab when selecting an item
+      .on( "keydown", function( event ) {
+        if ( event.keyCode === $.ui.keyCode.TAB &&
+            $( this ).autocomplete( "instance" ).menu.active ) {
+          event.preventDefault();
+        }
+      })
+      .autocomplete({
+        minLength: 0,
+        source: function( request, response ) {
+          // delegate back to autocomplete, but extract the last term
+          response( $.ui.autocomplete.filter(
+            availableTags, extractLast( request.term ) ) );
+        },
+        focus: function() {
+          // prevent value inserted on focus
+          return false;
+        },
+        select: function( event, ui ) {
+          var terms = split( this.value );
+          // remove the current input
+          terms.pop();
+          // add the selected item
+          terms.push( ui.item.value );
+          // add placeholder to get the comma-and-space at the end
+          terms.push( "" );
+          this.value = terms.join( ", " );
+          return false;
+        }
+      });
+  } );
+  </script>
+</html>
