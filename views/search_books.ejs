@@ -24,10 +24,6 @@ textarea:focus, input:focus{
     outline: none;
     font-size: 1.4em;
 }
-input[type=radio],
-input.radio {
-	width: auto;
-}
 h2{ text-align: center; margin-top: 0px; margin-bottom: 0px; }
 input{
 	background-color: transparent;
@@ -51,10 +47,6 @@ body {
 	width: 90%;
 	display: inline-block;
 	font-family: 'Nunito',sans-serif;
-}
-
-select {
-
 }
 
 button{
@@ -111,6 +103,7 @@ form {
 					<option name="sb_type" value="name">Book Name</option>
 					<option name="sb_type" value="isbn">ISBN</option>
 					<option name="sb_type" value="author">Author</option>
+					<option name="sb_type" value="advanced">Advanced</option>
 				</select>
 			<div style="text-align: center;float: right; display: inline-block;">
 				<button id="sb_button">Search Book</button>
@@ -140,6 +133,9 @@ form {
 			//search radio
 			$("#sb_type").change((e)=>{
 				var ch = $("#sb_type option:selected").text();
+				if(ch=='Advanced') {
+					window.location.href="/search_tags";
+				}
 				$("#sb_isbn").attr("placeholder",ch);
 			});
 		});

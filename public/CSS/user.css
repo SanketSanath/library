@@ -27,15 +27,33 @@ body{
 	border-radius: 15px;
 	box-shadow: 5px 5px #000000aa;
 }
+
 table, th, td {
-  border: 1px solid black;
   border-collapse: collapse;
   padding: 4px 12px 4px 12px;
+}
+table td,table th {
+	  border: 1px solid black;
+}
+table tr:first-child th {
+  border-top: 0;
+}
+table tr:last-child td {
+  border-bottom: 0;
+}
+table tr td:first-child,
+table tr th:first-child {
+  border-left: 0;
+}
+table tr td:last-child,
+table tr th:last-child {
+  border-right: 0;
 }
 table {
   width: 90%;
   margin: auto;
 }
+
 
 
 .books_cont {

@@ -3,30 +3,33 @@
 <head>
 	<title>Book List</title>
 	<link rel="stylesheet" type="text/css" href="/CSS/book.css">
+	<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 </head>
 <body>
 	<div id="header">
-		<div style="float: left;">
-			<span style="color: #aaa">Total Book:</span> <%= books.length %><br>
-		</div>
-		<center><h1 style="color: #00d8ff;">Book List</h1></center>
+		<center>
+			<span>Total Book:<b> <%= books.length %></b> </span>
+			</center>
 	</div>
 	
-	<div class="books_cont">
+	<div>
 	<% for(var i = 0; i < books.length; i++){ %>
-		<div class="book_cont">
-
-			<% if(books[i].url){ %>
-				<button value="<%= result[i].isbn %>" class="return_btn" style="float: right; width: 25%;">Read Online</button>
+		<table class="book_cont">
+			<tr>
+				<th>Book Name</th>
+				<th>Author</th>
+			</tr>
+			<% for(var i = 0; i < books.length; i++){ %>
+			<tr style="color: #000">
+				<td>
+					<%= books[i].name %>
+				</td>
+				<td>
+					<%= books[i].author %>
+				</td>
+			</tr>
 			<% } %>
-
-			<button value="<%= books[i].isbn %>" class="return_btn" style="float: right; width: 25%;">View Availability</button>
-			<span style="color: #aaa">ISBN:</span> <%= books[i].isbn %><br>
-			<span style="color: #aaa">Book Name:</span> <%= books[i].name %><br>
-			<span style="color: #aaa">Author:</span> <%= books[i].author %><br>
-			<span style="color: #aaa">Location:</span> <%= books[i].section %>(sec),  <%= books[i].sub_section %>(sub-sec)<br>
-			
-		</div>
+		</table>
 	<% } %>
 	</div>
 
