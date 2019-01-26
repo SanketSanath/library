@@ -13,6 +13,8 @@
             max-height: 300px;
             overflow-y: auto;
             overflow-x: hidden;
+            background-color: #312b21;
+            color: white;
         }
         * html .ui-autocomplete {
             height: 100px;
@@ -23,33 +25,72 @@
     </style>
 		<style type="text/css">
 			
-input[type=radio],
-input.radio {
-  width: auto;
+
+textarea:focus, input:focus{
+    outline: none;
+    font-size: 1.4em;
 }
-h2{ text-align: center; color: #00d8ff; margin-top: 0px; margin-bottom: 0px; }
+h2{ text-align: center; margin-top: 0px; margin-bottom: 0px; }
+button{
+  background-color: #312b21;
+  border: none;
+  color: white;
+  display: inline;
+  padding: 7px 15px;
+  text-align: center;
+  font-size: 1.1em;
+  float: center;
+  margin-top: 5px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: black;
+  opacity: 1; /* Firefox */
+}
 input{
 	background-color: transparent;
-	color: white;
-	border: 0px;
-	border-bottom: 2px solid white;
-	width: 100%;
-	padding: 5px;
-	margin-bottom: 20px;
+  color: black;
+  border: 0px;
+  font-size: 1em;
+  border-bottom: 2px solid black;
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 20px;
+}
+span {
+  color: black;font-size: 1.2em;opacity: 0.8; background-color: #e1d2b8; padding: 8px 16px 8px 16px; border-radius: 40px;
+  font-weight: normal;
 }
 body {
-	background-color: #222;
-	color: #eee;
-	width: 400px;
-	padding: 30px;
-	display: inline-block;
+  width: 90%;
+  display: inline-block;
+  font-family: 'Nunito',sans-serif;
+}
+#search_book {
+  margin: auto;
+  width: 400px;
+  padding: 30px;
+  padding-bottom: 45px;
+  color: black;
+  font-size: 1.2em;
+  opacity: 0.8;
+  background-color: #e1d2b8;
+  border-radius: 15px;
+  box-shadow: 5px 5px #000000aa;
 }
 		</style>
 	</head>
 	<body>
 		<div class="container">
-		<h2>Search Book</h2>
-			<div id="search_book">
+
+    <center>
+      <span>Advanced Search (using tags)</span>
+    </center>
+
+      <br>
+      <br>
+    			<div id="search_book">
 				<input type="text" id="sb_tag" placeholder="Tag" required /="true"><br>
 				<div style="text-align: center;">
 					<button id="sb_button">Search Book</button>

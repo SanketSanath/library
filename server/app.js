@@ -203,7 +203,8 @@ app.get('/admin/book/:id',isAdmin, (req, res)=>{
 							issued_book.push({book_id : result2[items].book_id, user_id: null, due_date: null});
 							result1[0].available_book++; //if book is not borrowed then its available
 						} else {
-							issued_book.push({book_id : result2[items].book_id, user_id: result3[0].user_id, due_date: result3[0].due_date});
+							var day = (moment(result3[0].due_date).utc().format('DD/MM/YYYY'))
+							issued_book.push({book_id : result2[items].book_id, user_id: result3[0].user_id, due_date: day});
 						}
 						items++;
 						if(items == result2.length){
@@ -243,7 +244,8 @@ app.get('/admin/book_name/:name',isAdmin, (req, res)=>{
 								issued_book.push({book_id : result2[items].book_id, user_id: null, due_date: null, name: name, author: author});
 								result1[0].available_book++; //if book is not borrowed then its available
 							} else {
-								issued_book.push({book_id : result2[items].book_id, user_id: result3[0].user_id, due_date: result3[0].due_date, name: name, author: author});
+								var day = (moment(result3[0].due_date).utc().format('DD/MM/YYYY'))
+								issued_book.push({book_id : result2[items].book_id, user_id: result3[0].user_id, due_date: day, name: name, author: author});
 							}
 							items++;
 							if(items == result2.length && i1 == result1.length){
@@ -284,7 +286,8 @@ app.get('/admin/book_author/:author', isAdmin, (req, res)=>{
 								issued_book.push({book_id : result2[items].book_id, user_id: null, due_date: null, name: name, author: author});
 								result1[0].available_book++; //if book is not borrowed then its available
 							} else {
-								issued_book.push({book_id : result2[items].book_id, user_id: result3[0].user_id, due_date: result3[0].due_date, name: name, author:  author});
+								var day = (moment(result3[0].due_date).utc().format('DD/MM/YYYY'))
+								issued_book.push({book_id : result2[items].book_id, user_id: result3[0].user_id, due_date: day, name: name, author:  author});
 							}
 							items++;
 							if(items == result2.length && i1 == result1.length){
@@ -319,7 +322,8 @@ app.get('/user/book/:id', isUser, (req, res)=>{
 							issued_book.push({book_id : result2[items].book_id, user_id: null, due_date: null});
 							result1[0].available_book++; //if book is not borrowed then its available
 						} else {
-							issued_book.push({book_id : result2[items].book_id, user_id: result3[0].user_id, due_date: result3[0].due_date});
+							var day = (moment(result3[0].due_date).utc().format('DD/MM/YYYY'))
+							issued_book.push({book_id : result2[items].book_id, user_id: result3[0].user_id, due_date: day});
 						}
 						items++;
 						if(items == result2.length){
@@ -359,7 +363,8 @@ app.get('/user/book_name/:name',isUser, (req, res)=>{
 								issued_book.push({book_id : result2[items].book_id, user_id: null, due_date: null, name: name, author: author});
 								result1[0].available_book++; //if book is not borrowed then its available
 							} else {
-								issued_book.push({book_id : result2[items].book_id, user_id: result3[0].user_id, due_date: result3[0].due_date, name: name, author: author});
+								var day = (moment(result3[0].due_date).utc().format('DD/MM/YYYY'))
+								issued_book.push({book_id : result2[items].book_id, user_id: result3[0].user_id, due_date: day, name: name, author: author});
 							}
 							items++;
 							if(items == result2.length && i1 == result1.length){
@@ -404,7 +409,8 @@ app.get('/user/book_author/:author', isUser, (req, res)=>{
 								issued_book.push({book_id : result2[items].book_id, user_id: null, due_date: null, name: name, author: author});
 								result1[0].available_book++; //if book is not borrowed then its available
 							} else {
-								issued_book.push({book_id : result2[items].book_id, user_id: result3[0].user_id, due_date: result3[0].due_date, name: name, author:  author});
+								var day = (moment(result3[0].due_date).utc().format('DD/MM/YYYY'))
+								issued_book.push({book_id : result2[items].book_id, user_id: result3[0].user_id, due_date:day, name: name, author:  author});
 							}
 							items++;
 							if(items == result2.length && i1 == result1.length){
@@ -600,8 +606,9 @@ app.get('/view_user/:id',isAdmin, (req, res)=>{
 			con.query("SELECT * FROM borrowed WHERE user_id="+mysql.escape(id), function(err, result2, fields){
 				var items = 0, issued_book = [];
 				console.log(result2);
+				var day = (moment(result2[items].due_date).utc().format('DD/MM/YYYY'))
 				while(items<result2.length) {
-					issued_book.push({book_id : result2[items].book_id,due_date: result2[items].due_date});
+					issued_book.push({book_id : result2[items].book_id,due_date: day});
 					items++;
 				}
 				console.log(issued_book);

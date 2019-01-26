@@ -7,34 +7,43 @@
 </head>
 <body>
 	<div id="header">
-		<div style="float: left;">
-			<span style="color: #aaa">ISBN:</span> <%= result1[0].isbn %><br>
-			<span style="color: #aaa">Author:</span> <%= result1[0].author %><br>
-			<span style="color: #aaa">Total Book:</span> <%= result1[0].total_book %><br>
-			<span style="color: #aaa">Available Book:</span> <%= result1[0].available_book %><br>
-		</div>
-		<center><h1 style="color: #00d8ff;"><%= result1[0].name %></h1></center>
+		<center><span>Availability of <b><%= result1[0].name %></b></span></center>
 	</div>
 	
-	<div class="books_cont">
-	<% for(var i = 0; i < issued_book.length; i++){ %>
-		<% if(issued_book[i].user_id == null){ %>
-		<div class="book_cont">
+	<div>
+		<center>
+		<span style="background-color: #312b21; color: white;">Total Book(s): <b><%= result1[0].total_book %></b></span>
+		<span style="background-color: green; color: white;">Available Book(s): <b><%= result1[0].available_book %></b></span>
+		</center>
+		<table  class="book_cont">
+			<tr>
+				<th>
+					Book ID
+				</th>
+				<th>
+					Expected Availability
+				</th>
+			</tr>
+			<% for(var i = 0; i < issued_book.length; i++){ %>
+			<% if(issued_book[i].user_id == null){ %>
+			<tr>
+				<td>
+					<%= issued_book[i].book_id %>
+				</td>
+				<td style="float: right; background-color: green; color: #fff; font-weight: bold; padding: 3px;">Book Available
+				</td>
+			</tr>
 
-			<span style="color: #aaa">Book ID:</span> <%= issued_book[i].book_id %>
-			<span style="float: right; background-color: green; color: #fff; font-weight: bold; padding: 3px;">Book Available</span><br clear="all">
-
-		</div>
-		<% } else {%>
-		<div class="book_cont">
-
-			<span style="color: #aaa">Book ID:</span> <%= issued_book[i].book_id %>
-			<span style="float: right; background-color: #ff4800; color: #fff; font-weight: bold;  padding: 3px;">Unavailable</span><br clear="all">
-			<span style="color: #aaa">Due Date:</span> <%= issued_book[i].due_date %><br>
+			<% } else {%>
+			<tr>
+				<td>
+					<%= issued_book[i].book_id %>
+				</td><td style="float: right; background-color: #ff4800; color: #fff; font-weight: bold;  padding: 3px;"> <%= issued_book[i].due_date %></td>
+			</tr>
 			
-		</div>
-		<% } %>
-	<% } %>
+			<% } %>
+			<% } %>
+		</table>
 	</div>
 
 </body>
