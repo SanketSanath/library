@@ -5,6 +5,8 @@ var session = require('express-session');
 const bcrypt = require('bcryptjs');
 const fs = require('fs');
 const upload = require('express-fileupload');
+const moment = require('moment');
+
 
 var sess = {
   secret: 'library secret. cant guess',
@@ -441,7 +443,6 @@ app.post('/get_fine',isAdmin, (req, res)=>{
 });
 
 app.get('/book_list', (req, res)=>{
-	console.log("here");
 	if(req.body.str) {
 		//here
 		console.log(req.body.str);
@@ -638,7 +639,8 @@ app.get('/user/dashboard',isUser, (req, res)=>{
 							throw err;
 						console.log(result3[0])
 						con.query("SELECT * FROM books WHERE isbn="+mysql.escape(result3[0].isbn), function(err, result4, fields) {
-							issued_book.push({book_id : result2[items].book_id, due_date: result2[items].due_date, isbn:result3[0].isbn, name: result4[0].name, author: result4[0].author})
+							var day = (moment(result2[items].due_date).utc().format('DD/MM/YYYY'))
+							issued_book.push({book_id : result2[items].book_id, due_date: day, isbn:result3[0].isbn, name: result4[0].name, author: result4[0].author})
 							items++;
 							if(items==result2.length) {
 								res.render('user_dashboard.ejs', {title: "User",user_id,result,issued_book});

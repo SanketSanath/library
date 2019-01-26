@@ -1,15 +1,20 @@
 body{
-	background-image: url('/back.jpg');
 	background-size: cover;
-	color: #00d8ff;
-	font-family: arial;
+	background-image: url('/back.jpg');
+/*	background-color: #312b21;
+*/	color:#fff;
+	font-family: 'Nunito',sans-serif;
 }
 
 #header{
-	background-color: #222;
 	padding: 40px;
 	text-align: center;
 	margin-bottom: 30px;
+}
+h1{
+		font-size: 5em;
+font-family: 'Bitter', serif;
+font-weight:normal;
 }
 #div1{
 	float: left;
@@ -20,43 +25,53 @@ body{
 	width: 47%;
 }
 p{
+	font-size: 25px;
 	padding-right: 120px;
 	padding-left: 120px;
 }
 
 #inner_div1, #inner_div2{
-	background-color: #222;
-	color: #eee;
+	background-color: #e1d2b8;
+	color: #000;
 	width: 400px;
+	opacity: 0.7;
 	padding: 30px;
+	border-radius: 20px;
+	box-shadow: 10px 10px #000000aa;
 }
 
-h2{ text-align: center; color: #00d8ff; margin-top: 0px; }
+textarea:focus, input:focus{
+    outline: none;
+    font-size: 1.4em;
+}
+
+h2{ text-align: center; color: #000	; margin-top: 0px; font-size: 1.8em; text-decoration: underline; }
 #inner_div1{ float: right; }
 #inner_div2{ float: left; }
 
 input{
 	background-color: transparent;
-	color: white;
+	color: black;
+	font-size: 1.1em;
 	border: 0px;
-	border-bottom: 2px solid white;
+	border-bottom: 2px solid #312b21;
 	width: 100%;
 	padding: 5px;
 	margin-bottom: 20px;
 }
 
 button{
-	background-color: #00d8ff;
+	background-color: #312b21;
     border: none;
-    color: black;
+    color: white;
     display: inline;
     padding: 10px 20px;
     text-align: center;
-    font-size: 16px;
+    font-size: 1.3em;
     float: center;
-    margin: 0 auto;
+    margin-top: 15px;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 footer{

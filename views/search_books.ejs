@@ -1,91 +1,147 @@
 <html>
-	<head>
-		<title>
-			Search books
-		</title>
-		<script src="/JS/jquery-3.3.1.min.js"></script>
-    <style>
-        .ui-autocomplete {
-            max-height: 300px;
-            overflow-y: auto;
-            overflow-x: hidden;
-        }
-        * html .ui-autocomplete {
-            height: 100px;
-        }
-        .extra {
-            width: 50px;
-        }
-    </style>
-		<style type="text/css">
-			
+<head>
+	<title>
+		Search books
+	</title>
+	<script src="/JS/jquery-3.3.1.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+	<style>
+	.ui-autocomplete {
+		max-height: 300px;
+		overflow-y: auto;
+		overflow-x: hidden;
+	}
+	* html .ui-autocomplete {
+		height: 100px;
+	}
+	.extra {
+		width: 50px;
+	}
+</style>
+<style type="text/css">
+
+textarea:focus, input:focus{
+    outline: none;
+    font-size: 1.4em;
+}
 input[type=radio],
 input.radio {
-  width: auto;
+	width: auto;
 }
-h2{ text-align: center; color: #00d8ff; margin-top: 0px; margin-bottom: 0px; }
+h2{ text-align: center; margin-top: 0px; margin-bottom: 0px; }
 input{
 	background-color: transparent;
-	color: white;
+	color: black;
 	border: 0px;
-	border-bottom: 2px solid white;
+	font-size: 1em;
+	border-bottom: 2px solid black;
 	width: 100%;
 	padding: 5px;
 	margin-bottom: 20px;
 }
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+	color: black;
+	opacity: 1; /* Firefox */
+}
+span {
+	color: black;font-size: 1.2em;opacity: 0.8; background-color: #e1d2b8; padding: 8px 16px 8px 16px; border-radius: 40px;
+	font-weight: normal;
+}
 body {
-	background-color: #222;
-	color: #eee;
+	width: 90%;
+	display: inline-block;
+	font-family: 'Nunito',sans-serif;
+}
+
+select {
+
+}
+
+button{
+	background-color: #312b21;
+	border: none;
+	color: white;
+	display: inline;
+	padding: 7px 15px;
+	text-align: center;
+	font-size: 1.1em;
+	float: center;
+	margin-top: 5px;
+	cursor: pointer;
+	border-radius: 10px;
+}
+select{
+	background-color: #312b21;
+	border: none;
+	color: white;
+	display: inline;
+	padding: 7px 15px;
+	text-align: center;
+	font-size: 1em;
+	float: center;
+	margin-top: 5px;
+	cursor: pointer;
+	border-radius: 10px;
+}
+form {
+	margin: auto;
 	width: 400px;
 	padding: 30px;
-	display: inline-block;
+	padding-bottom: 45px;
+	color: black;
+	font-size: 1.2em;
+	opacity: 0.8;
+	background-color: #e1d2b8;
+	border-radius: 15px;
+	box-shadow: 5px 5px #000000aa;
 }
-		</style>
-	</head>
-	<body>
-		<div class="container">
-		<h2>Search Book</h2>
-			<form id="search_book">
-				<input type="text" id="sb_isbn" placeholder="ISBN" required /="true"><br>
-				<input type="radio" name="sb_type" checked="true" value="isbn">
-				<label for="isbn">ISBN</label>
-				<br/>
-				<input type="radio" name="sb_type" value="name">
-				<label for="name">Book Name</label>
-				<br/>
-				<input type="radio" name="sb_type" value="author">
-				<label for="author">Author</label>
-				<br/>
+</style>
+</head>
+<body>
+	<div class="container">
+		<center>
+			<span>Search Book</span>
+		</center>
+		<br>
+		<br>
 
-				<div style="text-align: center;">
-					<button id="sb_button">Search Book</button>
-				</div>
-			</form>
-		</div>
-	</body>
+		<form id="search_book">
+			<input type="text" id="sb_isbn" placeholder="Book Name" required /="true"><br>
+				<select id="sb_type" style="float: left; display: inline-block;">
+					<option name="sb_type" value="name">Book Name</option>
+					<option name="sb_type" value="isbn">ISBN</option>
+					<option name="sb_type" value="author">Author</option>
+				</select>
+			<div style="text-align: center;float: right; display: inline-block;">
+				<button id="sb_button">Search Book</button>
+			</div>
+			<br>
+		</form>
+	</div>
+</body>
 
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$("#sb_button").click((e)=>{
-				e.preventDefault();
-				console.log("doing")
-				var isbn = $("#sb_isbn").val(); 
-				$("#sb_isbn").val('');
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#sb_button").click((e)=>{
+			e.preventDefault();
+			console.log("doing")
+			var isbn = $("#sb_isbn").val(); 
+			$("#sb_isbn").val('');
 
-				var ch = $('input[name=sb_type]:checked').val();
-				console.log(ch);
-				if(ch=='isbn')
-					window.location.href = "/user/book/"+isbn;
-				else if(ch=='name')
-					window.location.href = "/user/book_name/"+isbn;
-				else if(ch=='author')
-					window.location.href = "/user/book_author/"+isbn;
-			});
+			var ch = $("#sb_type").val();
+			console.log(ch);
+			if(ch=='isbn')
+				window.location.href = "/user/book/"+isbn;
+			else if(ch=='name')
+				window.location.href = "/user/book_name/"+isbn;
+			else if(ch=='author')
+				window.location.href = "/user/book_author/"+isbn;
+		});
 			//search radio
 			$("#sb_type").change((e)=>{
-				var val = $('input[name=sb_type]:checked').val();
-				 $("#sb_isbn").placeholder(val);
+				var ch = $("#sb_type option:selected").text();
+				$("#sb_isbn").attr("placeholder",ch);
 			});
 		});
 	</script>
-</html>
+	</html>
