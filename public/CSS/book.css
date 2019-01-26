@@ -1,26 +1,53 @@
 body{
-	background-image: url('/back.jpg');
-	background-attachment: fixed;
-	background-size: cover;
-	color: #eee;
-	font-family: arial;
+	font-family: 'Nunito',sans-serif;
 }
 
 #header{
-	background-color: #222;
-	padding: 40px;
 	margin-bottom: 30px;
 	text-align: left;
 	top: 5px;
 	position: -webkit-sticky;
 	position: sticky;
 }
+span {
+  color: black;font-size: 1.2em;opacity: 0.8; background-color: #e1d2b8; padding: 8px 16px 8px 16px; border-radius: 40px;
+  font-weight: normal;
+}
+table, th, td {
+  border-collapse: collapse;
+  padding: 4px 12px 4px 12px;
+}
+table td,table th {
+	  border: 1px solid black;
+}
+table tr:first-child th {
+  border-top: 0;
+}
+table tr:last-child td {
+  border-bottom: 0;
+}
+table tr td:first-child,
+table tr th:first-child {
+  border-left: 0;
+}
+table tr td:last-child,
+table tr th:last-child {
+  border-right: 0;
+}
+table {
+  width: 90%;
+  margin: auto;
+}
 
 .book_cont {
-	border-style: groove;
-	border-width: 1px 2px 1px 2px;
-	border-color: #bbb;
 	padding: 20px;
+	background-color: #e1d2b8;
+	color: #000;
+	opacity: 0.8;
+    font-size: 1.2em;
+    margin-top: 22px;
+	border-radius: 15px;
+	box-shadow: 5px 5px #000000aa;
 }
 
 .books_cont {
