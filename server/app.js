@@ -662,6 +662,11 @@ app.get('/elib', isUser, (req, res)=>{
 	})
 })
 
+//this is to test dashboard
+app.get('/testdash', (req, res)=>{
+	res.render('testdash.ejs');
+})
+
 app.listen(3000, ()=>{
 	console.log('server is running');
 });
