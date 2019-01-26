@@ -3,33 +3,53 @@ body{
 	background-attachment: fixed;
 	background-size: cover;
 	color: #eee;
-	font-family: arial;
+	font-family: 'Nunito',sans-serif;
+	overflow: true;
 }
 
 #header{
-	background-color: #222;
-	padding: 40px;
+	background-color: transparent;
+	opacity: 0.7;
+	padding: 3px;
 	margin-bottom: 30px;
 	text-align: left;
-	top: 5px;
 	position: -webkit-sticky;
 	position: sticky;
 }
 
 .book_cont {
-	border-style: groove;
-	border-width: 1px 2px 1px 2px;
-	border-color: #bbb;
 	padding: 20px;
+	background-color: #e1d2b8;
+	color: #000;
+	opacity: 0.8;
+    font-size: 1.2em;
+    margin-top: 22px;
+	border-radius: 15px;
+	box-shadow: 5px 5px #000000aa;
+}
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 4px 12px 4px 12px;
+}
+table {
+  width: 90%;
+  margin: auto;
 }
 
-.books_cont {
-	border: 2px solid black;
-	width: 560px;
-	padding: 30px 70px;
-	margin: auto;
-	background-color: #222222ef;
 
+.books_cont {
+	width: 700px;
+	padding: 0px 50px;
+	margin-top: 80px;
+	color: white;
+	border-radius: 20px;
+	display: inline-block;
+
+}
+h1 {
+	font-weight:normal;
+	font-size: 1.9em;
 }
 
 input {

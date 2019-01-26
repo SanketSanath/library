@@ -3,67 +3,76 @@
 <head>
 	<title><%= title %></title>
 	<link rel="stylesheet" type="text/css" href="/CSS/user.css">
+	<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+	<script type="text/javascript"></script>
 </head>
 <body>
 	<div id="header">
 
-		<div style="float: right; align-content: center;">
-			<a href="/logout" style="padding: 10px; background-color:#ddd; text-decoration: none; color:#000;" id="logout">Log out</a>
+
+		<div style="vertical-align: top;margin-top: 16px;color: #000; font-size: 1.5em; width: 33%;text-align: left; display: inline-block;">
+			<span style="background-color: #e1d2b8; padding: 8px 16px 8px 16px; border-radius: 40px;">Due fine: <%= result[0].due_fines %></span>
 
 		</div>
-		<div style="float: left;">
-			<span style="color: #aaa">User ID:</span> <%= user_id %><br>
-			<span style="color: #aaa">Roll No.:</span> <%= result[0].roll_no %><br>
-			<span style="color: #aaa">Branch:</span> <%= result[0].branch %><br>
-			<span style="color: #aaa">Due fine:</span> <%= result[0].due_fines %><br>
-
+		<div style="text-align: center; width: 33%; font-size: 1.7em;display: inline-block;">
+			<span style="color: #fff;text-align: center;font-size: 1.9em;"><%= result[0].name %></span>
 		</div>
-		<center><h1 style="color: #00d8ff;">Welcome <%= result[0].name %>!</h1></center>
 
+
+		<div style="vertical-align: top; margin-top: 16px; text-align: right; width: 33%;display: inline-block; ">
+			<a href="/logout" style="font-size: 1.5em; background-color: #e1d2b8; padding: 8px 16px 8px 16px; border-radius: 40px;text-decoration: none; color:#000;" id="logout">Log out</a>
+		</div>
 	</div>
-
-		<div id="search_button" style="padding: 20px; text-align: center; width: 100%">
-			<span  style="cursor: pointer; font-size: 24px; padding: 10px; background-color: #000;"> Search books by details</span>
-		</div>
-
-		<div id="search_tag_button" style="padding: 20px; text-align: center; width: 100%">
-			<span  style="cursor: pointer; font-size: 24px; padding: 10px; background-color: #000;"> Search books by tags</span>
-		</div>
-
-		<div id="e_lib_button" style="padding: 20px; text-align: center; width: 100%">
-			<span  style="cursor: pointer; font-size: 24px; padding: 10px; background-color: #000;">Enter E-Library</span>
-		</div>
 
 	<%if (issued_book.length > 0) { %>
 
 
-	<div class="books_cont">
+	<div class="books_cont" style="width: 50%; float: left;">
 
 
 
-					<span style="color: #aaa">Number of issued books:</span> <%= issued_book.length %><br>
-					<br>
-		<% for(var i = 0; i < issued_book.length; i++){ %>
-		<div class="book_cont">
-			<span style="color: #aaa">Book Name:</span> <%= issued_book[i].name %><br>
-			<span style="color: #aaa">Author:</span> <%= issued_book[i].author %><br>
-			<span style="color: #aaa">ISBN:</span> <%= issued_book[i].isbn %><br>
-			<span style="color: #aaa">Book ID:</span> <%= issued_book[i].book_id %><br>
-			<span style="color: #aaa">Due Date:</span> <%= issued_book[i].due_date %><br>
-		</div>
-		<% } %>
+<center>
+		<span style="margin: auto; color: black;font-size: 1.2em;opacity: 0.8; background-color: #e1d2b8; padding: 8px 16px 8px 16px; border-radius: 40px;">Books issued: <b><%= issued_book.length %></b></span>
+		</center>
+		<br>
+		<table class="book_cont">
+			<tr>
+				<th>Book Name</th>
+				<th>Author</th>
+				<th>Due date</th>
+			</tr>
+			<% for(var i = 0; i < issued_book.length; i++){ %>
+			<tr style="color: #000">
+				<td>
+					<%= issued_book[i].name %>
+				</td>
+				<td>
+					<%= issued_book[i].author %>
+				</td>
+				<td>
+					<%= issued_book[i].due_date %>
+				</td>
+			</tr>
+			<% } %>
+		</table>
 
 		<% } %>
 
 		<%if (issued_book.length <= 0) { %>
-			<div class="books_cont">
-				No books borrowed
-			</div>
+		<div class="books_cont">
+			No books borrowed
+		</div>
 		<% } %>
 
 
 
 	</div>
+
+<center>
+	<iframe style="width: 40%;height: 600px; float: left; margin-top: 70px;"src="/search_books" frameBorder="0"></iframe>
+	</center>
+
+	</iframe>
 
 
 
