@@ -653,6 +653,15 @@ app.get('/user/dashboard',isUser, (req, res)=>{
 	});
 });
 
+
+//elib dashboard
+app.get('/elib', isUser, (req, res)=>{
+	var user = req.session.user_id;
+	con.query("SELECT isbn, name, author, url from books where url IS NOT NULL", function(err, result, fields){
+		res.render('elib.ejs', {result, user});
+	})
+})
+
 app.listen(3000, ()=>{
 	console.log('server is running');
 });

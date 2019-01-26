@@ -28,11 +28,6 @@
 	<div id="search_button" style="padding: 20px; text-align: center;">
 		<span  style="cursor: pointer; font-size: 24px; padding: 10px; background-color: #000;"> Search books by details</span>
 	</div>
-
-	<div id="search_tag_button" style="padding: 20px; text-align: center;">
-		<span  style="cursor: pointer; font-size: 24px; padding: 10px; background-color: #000;"> Search books by tags</span>
-	</div>
- -->
 	<%if (issued_book.length > 0) { %>
 
 
@@ -96,6 +91,10 @@
 
 		$('#search_tag_button').click((e)=>{
 			window.location='/search_tags'
+		})
+
+		$('#e_lib_button').click((e)=>{
+			window.location='/elib'
 		})
 	})
 </script>

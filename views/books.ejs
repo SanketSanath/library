@@ -20,6 +20,8 @@
 			<br>
 			<span style="color: #aaa">Book ID:</span> <%= issued_book[i].book_id %>
 			<br>
+			<span style="color: #aaa">Location:</span> <%= issued_book[i].section %>(sec),  <%= issued_book[i].sub_section %>(sub-sec)
+			<br>
 			<span style="float: right; background-color: green; color: #fff; font-weight: bold; padding: 3px;">Book Available</span><br clear="all">
 			<input id="<%= issued_book[i].book_id %>" class="roll_input" type="text" name="user_id_input" placeholder="Issue Book To" required><br>
 			<button value="<%= issued_book[i].book_id %>" class="issue_btn">Issue Book</button><br clear="all">
