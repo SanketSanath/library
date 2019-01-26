@@ -9,10 +9,10 @@ const moment = require('moment');
 
 
 var sess = {
-  secret: 'library secret. cant guess',
-  resave: false,
-  saveUninitialized: false,
-  cookie: { maxAge: 3600000 }
+	secret: 'library secret. cant guess',
+	resave: false,
+	saveUninitialized: false,
+	cookie: { maxAge: 3600000 }
 };
 
 
@@ -24,8 +24,8 @@ app.use(express.static(__dirname+'/../public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session(sess))
 app.use(function(req, res, next) {
-  res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
-  next();
+	res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+	next();
 });
 
 app.set('view engine', 'ejs');
@@ -129,13 +129,13 @@ app.post('/add_book',isAdmin, (req,res)=> {
 				var sampleFile = req.files.pdf_file;
 				var file_url = (+new Date())+sampleFile.name.replace(/\s/g, '');
 				console.log(file_url);
-		    	sampleFile.mv(__dirname+'/../ebooks/'+file_url, function(err) {
-			    if (err)
-			      return res.status(500).send(err);
+				sampleFile.mv(__dirname+'/../ebooks/'+file_url, function(err) {
+					if (err)
+						return res.status(500).send(err);
 
 			    //res.send('File uploaded!');
-			  });
-		  	}
+			});
+			}
 			con.query("INSERT INTO books values ("+mysql.escape(book_isbn)+","+mysql.escape(book_name)+","+mysql.escape(book_author)+","+mysql.escape(section)+","+mysql.escape(sub_section)+","+mysql.escape(file_url)+")", function(err, result,fields) {
 				var barray = [];
 				if(err)
@@ -162,14 +162,14 @@ app.post('/add_book',isAdmin, (req,res)=> {
 
 
 app.post('/add_user',isAdmin, (req, res)=>{
-	var id = req.body.user_id, name = req.body.user_name, roll = parseInt(req.body.user_roll), dept = req.body.user_dept, pass = req.body.user_pass;
+	var email = req.body.user_email, id = req.body.user_id, name = req.body.user_name, roll = parseInt(req.body.user_roll), dept = req.body.user_dept, pass = req.body.user_pass;
 	console.log(id, name, roll, dept, pass);
 	con.query("SELECT * from users WHERE user_id="+mysql.escape(id), function(err, result, fields){
 		if(err)
 			throw err;
 		if(typeof result == 'undefined' || result.length == 0){
 			var salt = bcrypt.genSaltSync(10);
-			con.query("INSERT INTO users values ("+mysql.escape(id)+","+mysql.escape(bcrypt.hashSync(pass, salt))+","+mysql.escape(name)+","+mysql.escape(dept)+","+mysql.escape(roll)+", 2, 0);", function(err, result, fields){
+			con.query("INSERT INTO users values ("+mysql.escape(id)+","+mysql.escape(bcrypt.hashSync(pass, salt))+","+mysql.escape(name)+","+mysql.escape(dept)+","+mysql.escape(roll)+", 2, 0, DATE_ADD(CURDATE(), INTERVAL 1 YEAR), "+mysql.escape(email)+")", function(err, result, fields){
 				if(err)
 					throw err;
 				res.send('inserted');
@@ -179,6 +179,23 @@ app.post('/add_user',isAdmin, (req, res)=>{
 		}
 
 	})
+});
+
+app.get('/library_card/:user_id', (req, res)=>{
+	var id = req.params.user_id;
+	con.query("SELECT * from users WHERE user_id="+mysql.escape(id), function(err, result, fields){
+		if(err)
+			throw err;
+
+
+		if(typeof result == 'undefined' || result.length == 0){
+			res.status(500).send("");
+		}
+		else {
+			var day = (moment(result[0].validity).utc().format('DD/MM/YYYY'))
+			res.render("library_card.ejs",{name: result[0].name,branch: result[0].branch,roll: result[0].roll_no,validity: day, user_id: id });
+		}
+		});
 });
 
 
@@ -319,11 +336,12 @@ app.get('/user/book/:id', isUser, (req, res)=>{
 				for(var i=0; i<result2.length; i++){
 					con.query("SELECT * FROM borrowed WHERE book_id="+mysql.escape(result2[i].book_id), function(err, result3, fields){
 						if(result3.length == 0){
-							issued_book.push({book_id : result2[items].book_id, user_id: null, due_date: null});
+							issued_book.push({book_id : result2[items].book_id, user_id: null, due_date: null, section: result1[0].section, sub_section: result1[0].sub_section});
 							result1[0].available_book++; //if book is not borrowed then its available
 						} else {
+							console.log("somethiing: "+result1[0].section);
 							var day = (moment(result3[0].due_date).utc().format('DD/MM/YYYY'))
-							issued_book.push({book_id : result2[items].book_id, user_id: result3[0].user_id, due_date: day});
+							issued_book.push({book_id : result2[items].book_id, user_id: result3[0].user_id, due_date: day, section: result1[0].section, sub_section: result1[0].sub_section});
 						}
 						items++;
 						if(items == result2.length){
@@ -606,8 +624,8 @@ app.get('/view_user/:id',isAdmin, (req, res)=>{
 			con.query("SELECT * FROM borrowed WHERE user_id="+mysql.escape(id), function(err, result2, fields){
 				var items = 0, issued_book = [];
 				console.log(result2);
-				var day = (moment(result2[items].due_date).utc().format('DD/MM/YYYY'))
 				while(items<result2.length) {
+					var day = (moment(result2[items].due_date).utc().format('DD/MM/YYYY'))
 					issued_book.push({book_id : result2[items].book_id,due_date: day});
 					items++;
 				}
@@ -675,14 +693,14 @@ app.listen(3000, ()=>{
 
 
 var con = mysql.createConnection({
-  host: "localhost",
-  user: "developer",
-  password: "password",
-  database: "library",
-  multipleStatements: true
+	host: "localhost",
+	user: "developer",
+	password: "password",
+	database: "library",
+	multipleStatements: true
 });
 
 con.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected!");
+	if (err) throw err;
+	console.log("Connected!");
 });

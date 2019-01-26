@@ -5,14 +5,14 @@
 	<link rel="stylesheet" type="text/css" href="/CSS/book.css">
 	<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 </head>
-<body>
+<body style="background-image: url('/back.jpg');">
 	<div id="header">
 		<center>
 			<span>Total Book:<b> <%= books.length %></b> </span>
 			</center>
 	</div>
 	
-	<div>
+	<div class="books_cont">
 	<% for(var i = 0; i < books.length; i++){ %>
 		<table class="book_cont">
 			<tr>

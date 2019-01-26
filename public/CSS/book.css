@@ -51,11 +51,9 @@ table {
 }
 
 .books_cont {
-	border: 2px solid black;
 	width: 560px;
 	padding: 30px 70px;
 	margin: auto;
-	background-color: #222222ef;
 
 }
 

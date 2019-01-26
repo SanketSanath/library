@@ -111,10 +111,10 @@ $(document).ready(function() {
 	//add user
 	$("#au_button").click(function(e){
 		e.preventDefault();
-		var user_id = $('#au_user_id').val(), user_name = $('#au_user_name').val(), user_roll = $("#au_user_roll").val(), user_dept = $('#au_user_dept').val(), user_pass = $('#au_user_pass').val();
-		$('#au_user_id').val(''); $('#au_user_name').val(''); $("#au_user_roll").val(''); $('#au_user_dept').val(''); $('#au_user_pass').val('');
+		var user_id = $('#au_user_id').val(), user_name = $('#au_user_name').val(), user_roll = $("#au_user_roll").val(), user_dept = $('#au_user_dept').val(), user_pass = $('#au_user_pass').val(), user_email = $('#au_user_email').val();
+		$('#au_user_id').val(''); $('#au_user_name').val(''); $("#au_user_roll").val(''); $('#au_user_dept').val(''); $('#au_user_pass').val(''); $('#au_user_email').val('');
 
-		var data = {user_id, user_name, user_roll, user_dept, user_pass};
+		var data = {user_id, user_name, user_roll, user_dept, user_pass, user_email};
 		$.ajax({
 			type: 'POST',
 			url: '/add_user',
@@ -141,6 +141,15 @@ $(document).ready(function() {
 		$("#uu_user_id").val(''); $("#uu_user_pass").val('');
 
 		console.log('update user: ', user_id, user_pass);
+	});
+
+	$("#lc_button").click(function(e){
+		e.preventDefault();
+		var user_id = $("#lc_user_id").val(), user_pass = $("#uu_user_pass").val();
+		$("#lc_user_id").val('');
+		console.log('update user: ', user_id, user_pass);
+		var data ={user_id};
+		window.location.href='/library_card/'+user_id;
 	});
 
 
@@ -211,57 +220,74 @@ $(document).ready(function() {
 	});
 
 
-
-
-	var eau_degree = 0, eab_degree = 0, euu_degree=0, eub_degree=0, elu_degree=0, elb_degree=0;
-	$('.expand').click(function(e) {
-		var angle=((parseInt($(this).getRotateAngle()))+180)%360;
-		$(this).rotate({
-			animateTo:angle
-		})
+	$("#issue_return").click(function(e){
+		$("li").css("color","#f1f1f1");
+		$("li").css("background-color", "#312b21");
+		$(this).css("color","#312b21");
+		$(this).css("background-color", "#f1f1f1");
+		$(".inner_div").hide();
+		$("#inner_div9").show();
+		$("#inner_div10").show();
 	})
-	$('#expand_add_user').click(function() {
-		$('#add_user').toggle(500);
-	});
 
-	$('#expand_add_book').click(function() {
-		$('#add_book').toggle(500);
-	});
+	$("#add_data").click(function(e){
+		$("li").css("color","#f1f1f1");
+		$("li").css("background-color", "#312b21");
+		$(this).css("color","#312b21");
+		$(this).css("background-color", "#f1f1f1");
+		$("li").css("color","#f1f1f1");
+		$("li").css("background-color", "#312b21");
+		$(this).css("color","#312b21");
+		$(this).css("background-color", "#f1f1f1");
+		$(".inner_div").hide();
+		$("#inner_div1").show();
+		$("#inner_div2").show();
+	})
 
-	$('#expand_collect_fine').click(function() {
-		$('#collect_fine').toggle(500);
-	});
+	$("#update_data").click(function(e){
+		$("li").css("color","#f1f1f1");
+		$("li").css("background-color", "#312b21");
+		$(this).css("color","#312b21");
+		$(this).css("background-color", "#f1f1f1");
+		$("li").css("color","#f1f1f1");
+		$("li").css("background-color", "#312b21");
+		$(this).css("color","#312b21");
+		$(this).css("background-color", "#f1f1f1");
+		$(".inner_div").hide();
+		$("#inner_div3").show();
+		$("#inner_div4").show();
+	})
+
+	$("#list_data").click(function(e){
+		$("li").css("color","#f1f1f1");
+		$("li").css("background-color", "#312b21");
+		$(this).css("color","#312b21");
+		$(this).css("background-color", "#f1f1f1");
+		$(".inner_div").hide();
+		$("#inner_div5").show();
+		$("#inner_div6").show();
+	})
+
+	$("#search_data").click(function(e){
+		$("li").css("color","#f1f1f1");
+		$("li").css("background-color", "#312b21");
+		$(this).css("color","#312b21");
+		$(this).css("background-color", "#f1f1f1");
+		$(".inner_div").hide();
+		$("#inner_div7").show();
+		$("#inner_div8").show();
+	})
+
+	$("#collect_fine_li").click(function(e){
+		$("li").css("color","#f1f1f1");
+		$("li").css("background-color", "#312b21");
+		$(this).css("color","#312b21");
+		$(this).css("background-color", "#f1f1f1");
+		$(".inner_div").hide();
+		$("#inner_div11").show();
+		$("#inner_div12").show();
+	})
+	$("#issue_return").click();
 
 
-	$('#expand_update_user').click(function() {
-		$('#update_user').toggle(500);
-	});
-
-	$('#expand_update_book').click(function() {
-		$('#update_book').toggle(500);
-	});
-
-	$('#expand_list_user').click(function() {
-		$('#list_user').toggle(500);
-	});
-
-	$('#expand_list_book').click(function() {
-		$('#list_book').toggle(500);
-	});
-
-	$('#expand_search_user').click(function() {
-		$('#search_user').toggle(500);
-	});
-
-	$('#expand_search_book').click(function() {
-		$('#search_book').toggle(500);
-	});
-
-	$('#expand_issue_book').click(function() {
-		$('#issue_book').toggle(500);
-	});
-
-	$('#expand_return_book').click(function() {
-		$('#return_book').toggle(500);
-	});
 });
