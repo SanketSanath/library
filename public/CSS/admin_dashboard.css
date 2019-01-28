@@ -3,14 +3,52 @@ body{
 	background-attachment: fixed;
 	background-size: cover;
 	color: #00d8ff;
-	font-family: arial;
+	font-family: 'Nunito',sans-serif;
+	margin: 0px;
+	padding: 0px;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 15%;
+  background-color: #312b21;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
+li {
+  display: block;
+  color: #f1f1f1;
+  padding: 8px 16px;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 1.3em;
+}
+
+li.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+li:hover {
+  background-color: #555;
+  color: white;
+}
+
+main{
+	margin-left: 15%;
 }
 
 #header{
-	background-color: #222;
-	padding: 40px;
-	text-align: center;
+	background-color: transparent;
+	opacity: 0.7;
+	padding: 3px;
 	margin-bottom: 30px;
+	text-align: left;
+	position: -webkit-sticky;
+	position: sticky;
 }
 #div1{
 	float: left;
@@ -26,45 +64,51 @@ p{
 }
 
 .inner_div{
-	background-color: #222;
-	color: #eee;
+	background-color: #e1d2b8;
+	color: #000;
 	width: 400px;
+	opacity: 0.7;
 	padding: 30px;
+	border-radius: 20px;
+	box-shadow: 10px 10px #000000aa;
 	display: inline-block;
 }
+textarea:focus, input:focus{
+    outline: none;
+    font-size: 1.4em;
+}
+img {display: none;}
 
-h2{ text-align: center; color: #00d8ff; margin-top: 0px; margin-bottom: 0px; }
-#inner_div1, #inner_div3, #inner_div5, #inner_div7, #inner_div9{ float: right; margin-bottom: 10px;}
-#inner_div2, #inner_div4, #inner_div6, #inner_div8, #inner_div10 { float: left; margin-bottom: 10px;}
-
+h2{ text-align: center; color: black; margin-top: 0px; margin-bottom: 0px; }
+#inner_div1, #inner_div3, #inner_div5, #inner_div7, #inner_div9, #inner_div11 { float: right; margin-bottom: 10px;}
+#inner_div2, #inner_div4, #inner_div6, #inner_div8, #inner_div10, #inner_div12 { float: left; margin-bottom: 10px;}
 input{
 	background-color: transparent;
-	color: white;
+	color: black;
+	font-size: 1.1em;
 	border: 0px;
-	border-bottom: 2px solid white;
+	border-bottom: 2px solid #312b21;
 	width: 100%;
 	padding: 5px;
 	margin-bottom: 20px;
 }
 
+
 button{
-	background-color: #00d8ff;
+	background-color: #312b21;
     border: none;
-    color: black;
+    color: white;
     display: inline;
     padding: 10px 20px;
     text-align: center;
-    font-size: 16px;
+    font-size: 1.3em;
     float: center;
-    margin: 0 auto;
+    margin-top: 15px;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 
-#add_book, #add_user, #update_book, #update_user, #list_book, #list_user, #search_book, #search_user, #issue_book, #return_book, #collect_fine {
-	display: none;
-}
 
 .expand{
 	cursor: pointer;

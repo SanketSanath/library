@@ -2,182 +2,209 @@
 <html>
 <head>
 	<title><%= title %></title>
+	<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="/CSS/admin_dashboard.css">
+
 </head>
 <body>
-	<div id="header">
+	<ul>
+		<li id="issue_return" style="margin-top: 300px;">Issue/return</li>
+		<li id="add_data">Add Data</li>
+		<li id="update_data">Update Data</li>
+		<li id="search_data">Search Data</li>
+		<li id="list_data">List Data</li>
+		<li id="collect_fine_li">Miscellaneous</li>
 
-		<div style="float: right; align-content: center;">
-			<a href="/logout" style="padding: 10px; background-color:#ddd; text-decoration: none; color:#000;" id="logout">Log out</a>
+	</ul>
+	<main>
 
-		</div>
+		<div id="header">
+			<div style="vertical-align: top;margin-top: 16px;color: #000; font-size: 1.5em; width: 33%;text-align: left; display: inline-block;">
+			</div>
+			<div style="text-align: center; width: 33%; font-size: 1.7em;display: inline-block;">
+				<span style="color: #fff;text-align: center;font-size: 1.9em;">Admin Dashboard</span>
+			</div>
 
-		<h1>Admin Dashboard</h1>
-	</div>
-	
-	<div id="div1">
 
-		<div class="inner_div" id="inner_div9">
-			<img class="expand" id="expand_issue_book" src="/expand.svg" width="20px" height="20px" style="float: right;">
-			<h2>Issue Book</h2>
-			<form id="issue_book">
-				<input type="text" id="ib_book_id" placeholder="Book ID" required /><br>
-				<input type="text" id="ib_user_id" placeholder="User ID" required /><br>
-				<div style="text-align: center;">
-					<button id="ib_button">Issue Book</button>
-				</div>
-			</form>
-		</div>
-
-		<div class="inner_div" id="inner_div1">
-			<img class="expand" id="expand_add_book" src="/expand.svg" width="20px" height="20px" style="float: right;">
-			<h2>Add Book</h2>
-			<form id="add_book" method="POST" enctype="multipart/form-data" action="/add_book">
-				<input type="text" id="ab_isbn" name="book_isbn" placeholder="ISBN" required /><br>
-				<input type="text" id="ab_book_name" name="book_name" placeholder="Book Name" required /><br>
-				<input type="text" id="ab_author" name="book_author" placeholder="Author Name" required /><br>
-				<input type="number" id="ab_book_q" name="book_q" placeholder="Book Quantity" required /><br>
-				<input type="text" id="ab_section" name="section" placeholder="Section" /><br>
-				<input type="text" id="ab_sub_section" name="sub_section" placeholder="Sub Section" /><br>
-				<input type="file" id="ab_url" name="pdf_file" placeholder="Upload E-book" /><br>
-
-				<div style="text-align: center;">
-					<button id="ab_button" type="submit">Add Book</button>
-				</div>
-			</form>
-		</div>
-
-		<div class="inner_div" id="inner_div3">
-			<img class="expand" id="expand_update_book" src="/expand.svg" width="20px" height="20px" style="float: right;">
-			<h2>Update Book</h2>
-			<form id="update_book">
-				<input type="text" id="ub_isbn" placeholder="ISBN" required /><br>
-				<input type="number" id="ub_book_q" placeholder="Quantity" required /><br>
-				<div style="text-align: center;">
-					<button id="ub_button">Update Book</button>
-				</div>
-			</form>
-		</div>
-
-		<div class="inner_div" id="inner_div5">
-			<img class="expand" id="expand_list_book" src="/expand.svg" width="20px" height="20px" style="float: right;">
-			<h2>List Book</h2>
-			<form id="list_book">
-				<div style="text-align: center;">
-					<button id="lb_button">List Book</button>
-				</div>
-			</form>
-		</div>
-
-		<div class="inner_div" id="inner_div7">
-			<img class="expand" id="expand_search_book" src="/expand.svg" width="20px" height="20px" style="float: right;">
-			<h2>Search Book</h2>
-			<form id="search_book">
-				<input type="text" id="sb_isbn" placeholder="ISBN" required /="true"><br>
-				<input type="radio" name="sb_type" checked="true" value="isbn">
-				<label for="isbn">ISBN</label>
-				<br/>
-				<input type="radio" name="sb_type" value="name">
-				<label for="name">Book Name</label>
-				<br/>
-				<input type="radio" name="sb_type" value="author">
-				<label for="author">Author</label>
-				<br/>
-
-				<div style="text-align: center;">
-					<button id="sb_button">Search Book</button>
-				</div>
-			</form>
-		</div>
-
-		<div class="inner_div" id="inner_div3">
-			<img class="expand" id="expand_collect_fine" src="/expand.svg" width="20px" height="20px" style="float: right;">
-			<h2>Collect Fine</h2>
-			<form id="collect_fine">
-				<input type="text" id="cf_user_id" placeholder="User ID" required /><br>
-				<div id="cf_due_fine" style="display: none; margin-bottom: 20px; padding: 3px; text-align: center;">
-				Due fine
-				</div>
-				<input style="display: none;" type="text" id="cf_submitted_fine" placeholder="Fine submitted" /><br>
-				<div style="text-align: center;">
-					<button id="cf_button">Get fine</button>
-				</div>
-			</form>
+			<div style="vertical-align: top; margin-top: 16px; text-align: right; width: 33%;display: inline-block; ">
+				<a href="/logout" style="font-size: 1.5em; background-color: #e1d2b8; padding: 8px 16px 8px 16px; border-radius: 40px;text-decoration: none; color:#000;" id="logout">Log out</a>
+			</div>
 		</div>
 
 
-		
-	</div>
+
+		<div id="div1">
+
+			<div class="inner_div" id="inner_div9">
+				<img class="expand" id="expand_issue_book" src="/expand.svg" width="20px" height="20px" style="float: right;">
+				<h2>Issue Book</h2>
+				<form id="issue_book">
+					<input type="text" id="ib_book_id" placeholder="Book ID" required /><br>
+					<input type="text" id="ib_user_id" placeholder="User ID" required /><br>
+					<div style="text-align: center;">
+						<button id="ib_button">Issue Book</button>
+					</div>
+				</form>
+			</div>
+
+			<div class="inner_div" id="inner_div1">
+				<img class="expand" id="expand_add_book" src="/expand.svg" width="20px" height="20px" style="float: right;">
+				<h2>Add Book</h2>
+				<form id="add_book" method="POST" enctype="multipart/form-data" action="/add_book">
+					<input type="text" id="ab_isbn" name="book_isbn" placeholder="ISBN" required /><br>
+					<input type="text" id="ab_book_name" name="book_name" placeholder="Book Name" required /><br>
+					<input type="text" id="ab_author" name="book_author" placeholder="Author Name" required /><br>
+					<input type="number" id="ab_book_q" name="book_q" placeholder="Book Quantity" required /><br>
+					<input type="text" id="ab_section" name="section" placeholder="Section" /><br>
+					<input type="text" id="ab_sub_section" name="sub_section" placeholder="Sub Section" /><br>
+					<input type="file" id="ab_url" name="pdf_file" placeholder="Upload E-book" /><br>
+
+					<div style="text-align: center;">
+						<button id="ab_button" type="submit">Add Book</button>
+					</div>
+				</form>
+			</div>
+
+			<div class="inner_div" id="inner_div3">
+				<img class="expand" id="expand_update_book" src="/expand.svg" width="20px" height="20px" style="float: right;">
+				<h2>Update Book</h2>
+				<form id="update_book">
+					<input type="text" id="ub_isbn" placeholder="ISBN" required /><br>
+					<input type="number" id="ub_book_q" placeholder="Quantity" required /><br>
+					<div style="text-align: center;">
+						<button id="ub_button">Update Book</button>
+					</div>
+				</form>
+			</div>
+
+			<div class="inner_div" id="inner_div5">
+				<img class="expand" id="expand_list_book" src="/expand.svg" width="20px" height="20px" style="float: right;">
+				<form id="list_book">
+					<div style="text-align: center;">
+						<button id="lb_button">List Book</button>
+					</div>
+				</form>
+			</div>
+
+			<div class="inner_div" id="inner_div7">
+				<img class="expand" id="expand_search_book" src="/expand.svg" width="20px" height="20px" style="float: right;">
+				<h2>Search Book</h2>
+				<form id="search_book">
+					<input type="text" id="sb_isbn" placeholder="ISBN" required /="true"><br>
+					<input type="radio" name="sb_type" checked="true" value="isbn">
+					<label for="isbn">ISBN</label>
+					<br/>
+					<input type="radio" name="sb_type" value="name">
+					<label for="name">Book Name</label>
+					<br/>
+					<input type="radio" name="sb_type" value="author">
+					<label for="author">Author</label>
+					<br/>
+
+					<div style="text-align: center;">
+						<button id="sb_button">Search Book</button>
+					</div>
+				</form>
+			</div>
+
+			<div class="inner_div" id="inner_div11">
+				<img class="expand" id="expand_collect_fine" src="/expand.svg" width="20px" height="20px" style="float: right;">
+				<h2>Collect Fine</h2>
+				<form id="collect_fine">
+					<input type="text" id="cf_user_id" placeholder="User ID" required /><br>
+					<div id="cf_due_fine" style="display: none; margin-bottom: 20px; padding: 3px; text-align: center;">
+						Due fine
+					</div>
+					<input style="display: none;" type="text" id="cf_submitted_fine" placeholder="Fine submitted" /><br>
+					<div style="text-align: center;">
+						<button id="cf_button">Get fine</button>
+					</div>
+				</form>
+			</div>
 
 
-<!--right side of the screen-->
 
-	<div id="div2">
-
-		<div class="inner_div" id="inner_div10">
-			<img class="expand" id="expand_return_book" src="/expand.svg" width="20px" height="20px" style="float: right;">
-			<h2>Return Book</h2>
-			<form id="return_book">
-				<input type="text" id="rb_book_id" placeholder="Book ID" required /><br>
-
-				<div style="text-align: center;">
-					<button id="rb_button" type="submit">Return Book</button>
-				</div>
-			</form>
 		</div>
 
-		<div class="inner_div" id="inner_div2">
-			<img class="expand" id="expand_add_user" src="/expand.svg" width="20px" height="20px" style="float: right;">
-			<h2>Add User</h2>
-			<form id="add_user">
-				<input type="text" id="au_user_id" placeholder="User ID" required /><br>
-				<input type="text" id="au_user_name" placeholder="User Name" required /><br>
-				<input type="text" id="au_user_roll" placeholder="User Roll No." required /><br>
-				<input type="text" id="au_user_dept" placeholder="User Dept." required /><br>
-				<input type="password" id="au_user_pass" placeholder="User Password" required /><br>
 
-				<div style="text-align: center;">
-					<button id="au_button" type="submit">Add User</button>
-				</div>
-			</form>
+		<!--right side of the screen-->
+
+		<div id="div2">
+
+			<div class="inner_div" id="inner_div10">
+				<img class="expand" id="expand_return_book" src="/expand.svg" width="20px" height="20px" style="float: right;">
+				<h2>Return Book</h2>
+				<form id="return_book">
+					<input type="text" id="rb_book_id" placeholder="Book ID" required /><br>
+
+					<div style="text-align: center;">
+						<button id="rb_button" type="submit">Return Book</button>
+					</div>
+				</form>
+			</div>
+
+			<div class="inner_div" id="inner_div2">
+				<img class="expand" id="expand_add_user" src="/expand.svg" width="20px" height="20px" style="float: right;">
+				<h2>Add User</h2>
+				<form id="add_user">
+					<input type="text" id="au_user_id" placeholder="User ID" required /><br>
+					<input type="text" id="au_user_name" placeholder="User Name" required /><br>
+					<input type="text" id="au_user_roll" placeholder="User Roll No." required /><br>
+					<input type="text" id="au_user_dept" placeholder="User Dept." required /><br>
+					<input type="email" id="au_user_email" placeholder="E-mail" /><br>
+
+					<input type="password" id="au_user_pass" placeholder="User Password" required /><br>
+
+					<div style="text-align: center;">
+						<button id="au_button" type="submit">Add User</button>
+					</div>
+				</form>
+			</div>
+
+			<div class="inner_div" id="inner_div4">
+				<img class="expand" id="expand_update_user" src="/expand.svg" width="20px" height="20px" style="float: right;">
+				<h2>Update User</h2>
+				<form id="update_user">
+					<input type="text" id="uu_user_id" placeholder="User ID" required /><br>
+					<input type="password" id="uu_user_pass" placeholder="Password" required /><br>
+					<div style="text-align: center;">
+						<button id="uu_button" >Update User</button>
+					</div>
+				</form>
+			</div>
+
+			<div class="inner_div" id="inner_div6">
+				<img class="expand" id="expand_list_user" src="/expand.svg" width="20px" height="20px" style="float: right;">
+				<form id="list_user">
+					<div style="text-align: center;">
+						<button id="lu_button" >List User</button>
+					</div>
+				</form>
+			</div>
+
+			<div class="inner_div" id="inner_div8">
+				<img class="expand" id="expand_search_user" src="/expand.svg" width="20px" height="20px" style="float: right;">
+				<h2>Search User</h2>
+				<form id="search_user">
+					<input type="text" id="su_user_id" placeholder="User ID" required /><br>
+					<div style="text-align: center;">
+						<button id="su_button">Search User</button>
+					</div>
+				</form>
+			</div>
+			<div class="inner_div" id="inner_div12">
+				<h2>Generate Library Card</h2>
+				<form id="library_card">
+					<input type="text" id="lc_user_id" placeholder="User ID" required /><br>
+					<div style="text-align: center;">
+						<button id="lc_button" >Generate</button>
+					</div>
+				</form>
+			</div>
 		</div>
-
-		<div class="inner_div" id="inner_div4">
-			<img class="expand" id="expand_update_user" src="/expand.svg" width="20px" height="20px" style="float: right;">
-			<h2>Update User</h2>
-						<form id="update_user">
-				<input type="text" id="uu_user_id" placeholder="User ID" required /><br>
-				<input type="password" id="uu_user_pass" placeholder="Password" required /><br>
-				<div style="text-align: center;">
-					<button id="uu_button" >Update User</button>
-				</div>
-			</form>
-		</div>
-
-		<div class="inner_div" id="inner_div6">
-			<img class="expand" id="expand_list_user" src="/expand.svg" width="20px" height="20px" style="float: right;">
-			<h2>List User</h2>
-			<form id="list_user">
-				<div style="text-align: center;">
-					<button id="lu_button" >List User</button>
-				</div>
-			</form>
-		</div>
-
-		<div class="inner_div" id="inner_div8">
-			<img class="expand" id="expand_search_user" src="/expand.svg" width="20px" height="20px" style="float: right;">
-			<h2>Search User</h2>
-			<form id="search_user">
-				<input type="text" id="su_user_id" placeholder="User ID" required /><br>
-				<div style="text-align: center;">
-					<button id="su_button">Search User</button>
-				</div>
-			</form>
-		</div>
-
-	</div>
-	<br clear="all">
-	<br clear="all">
+		<br clear="all">
+		<br clear="all">
+	</main>
 
 </body>
 <script type="text/javascript" src="/JS/jquery-3.3.1.min.js"></script>

@@ -138,7 +138,7 @@ body {
     		success: function(str) {
     			console.log("success")
     			console.log(str)
-    			window.location='/book_list?str='+str;
+    			window.location='/book_list/'+str;
 			},
 			error: function(error) {	
 				alert("No books found for given tags");

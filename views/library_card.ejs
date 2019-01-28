@@ -1,27 +1,55 @@
 <html>
-	<head>
-		<title>
-			Library card
-		</title>
-		<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.8.0/dist/JsBarcode.all.min.js"></script>
-		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-	</head>
-	<body>
-		<p>
-			Name: <%=name%>
-		</br>
+<head>
+	<title>
+		Library card
+	</title>
+	<script type="text/javascript">
+		function printDiv(divID) {
+            //Get the HTML of div
+            var divElements = document.getElementById(divID).innerHTML;
+            //Get the HTML of whole page
+            var oldPage = document.body.innerHTML;
+
+            //Reset the page's HTML with div's HTML only
+            document.body.innerHTML = 
+            "<html><head><title></title></head><body>" + 
+            divElements + "</body>";
+
+            //Print Page
+            window.print();
+
+            //Restore orignal HTML
+            document.body.innerHTML = oldPage;
+
+
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.8.0/dist/JsBarcode.all.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+</head>
+<body>
+	<div id='printablediv' >
+
+		<div style="border: 2px dashed black;  display:inline-block; padding-left: 32px; padding-right: 32px;">
+			<h2> <u>Library Card</u> </h2>
+			<p>
+				Name: <%=name%>
+			</br>
 			Branch: <%=branch%>
 		</br>
-			Roll: <%=roll%>
-		</br>
-			Validity: <%=validity%>
-		</br>
-		<svg id="roll"></svg>
-	</p>
-	</body>
-	<script>
-		$(function(){
-			JsBarcode("#roll","<%=roll%>");
-		})
-	</script>
+		Roll: <%=roll%>
+	</br>
+	Validity: <%=validity%>
+</br>
+<svg id="roll"></svg>
+
+</p>
+</div>
+</div>
+<input type="button" value="Print Card" onclick="javascript:printDiv('printablediv')" />	</body>
+<script>
+	$(function(){
+		JsBarcode("#roll","<%=user_id%>");
+	})
+</script>
 </html>
